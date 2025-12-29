@@ -1,0 +1,292 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:HogFixtureLibrarianTool.ViewModels"
+             xmlns:types="clr-namespace:HogFixtureLibrarianTool.Models.Types"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="HogFixtureLibrarianTool.Views.StringmapEditorView"
+             x:DataType="vm:StringmapEditorViewModel">
+    <Design.DataContext>
+        <vm:StringmapEditorViewModel />
+    </Design.DataContext>
+    <Grid Classes="Default"
+          RowDefinitions="auto,*">
+        <Grid Classes="Default"
+              Grid.Row="0"
+              RowDefinitions="auto,auto,auto"
+              ColumnDefinitions="auto,*,auto,*,auto,*,auto,*">
+            <Label Classes="Default"
+                   Grid.Row="0"
+                   Grid.Column="0"
+                   Content="DMX Start:" />
+            <TextBox Classes="Default"
+                     x:Name="DmxStartInput"
+                     Grid.Row="0"
+                     Grid.Column="1"
+                     Text="{Binding RangeDmxStartInput}">
+                <ToolTip.Tip>
+                    <TextBlock Classes="Default"
+                               x:Name="DmxStartToolTip" />
+                </ToolTip.Tip>
+            </TextBox>
+            <Label Classes="Default"
+                   Grid.Row="0"
+                   Grid.Column="2"
+                   Content="Function:" />
+            <ComboBox Classes="Default"
+                      x:Name="RangeFunctionInput"
+                      Grid.Row="0"
+                      Grid.Column="3"
+                      ItemsSource="{Binding Functions}"
+                      SelectedItem="{Binding RangeFunctionInput}">
+                <ToolTip.Tip>
+                    <TextBlock Classes="Default"
+                               x:Name="RangeFunctionToolTip" />
+                </ToolTip.Tip>
+            </ComboBox>
+            <Label Classes="Default"
+                   Grid.Row="0"
+                   Grid.Column="4"
+                   Content="Feature:" />
+            <ComboBox Classes="Default"
+                      x:Name="RangeFeatureInput"
+                      Grid.Row="0"
+                      Grid.Column="5"
+                      ItemsSource="{Binding Features}"
+                      SelectedItem="{Binding RangeFeatureInput}">
+                <ToolTip.Tip>
+                    <TextBlock Classes="Default"
+                               x:Name="RangeFeatureToolTip" />
+                </ToolTip.Tip>
+            </ComboBox>
+            <Label Classes="Default"
+                   Grid.Row="0"
+                   Grid.Column="6"
+                   Content="Start:" />
+            <TextBox Classes="Default"
+                     x:Name="StartInput"
+                     Grid.Row="0"
+                     Grid.Column="7"
+                     Text="{Binding RangeStartInput}">
+                <ToolTip.Tip>
+                    <TextBlock Classes="Default"
+                               x:Name="StartToolTip" />
+                </ToolTip.Tip>
+            </TextBox>
+            <StackPanel Classes="Horizontal"
+                        Grid.Row="2"
+                        Grid.Column="0">
+                <Button Classes="NoBackground"
+                        Command="{Binding CreateRangeAndEntry}"
+                        HotKey="Enter">
+                    <StackPanel>
+                        <ToolTip.Tip>
+                            <TextBlock Classes="Default"
+                                       Text="Add Range and Entries" />
+                        </ToolTip.Tip>
+                        <PathIcon Classes="Add"
+                                  Data="{DynamicResource AddIconData}" />
+                    </StackPanel>
+                </Button>
+                <Button Classes="NoBackground"
+                        Command="{Binding AddMultipleRanges}"
+                        HotKey="Ctrl+Enter">
+                    <StackPanel Classes="Horizontal">
+                        <ToolTip.Tip>
+                            <TextBlock Classes="Default"
+                                       Text="Generate multiple Ranges and Entries" />
+                        </ToolTip.Tip>
+                        <PathIcon Classes="AddMultiple"
+                                  Data="{DynamicResource AddMultipleIconData}" />
+                    </StackPanel>
+                </Button>
+                <Button Classes="NoBackground"
+                        Command="{Binding GenerateXml}"
+                        HotKey="Alt+Enter">
+                    <StackPanel>
+                        <ToolTip.Tip>
+                            <TextBlock Classes="Default"
+                                       Text="Generate XML" />
+                        </ToolTip.Tip>
+                        <PathIcon Classes="Add"
+                                  Data="{DynamicResource GenerateXmlIconData}" />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+            <StackPanel Classes="HorizontalRightAligned"
+                        Grid.Row="2"
+                        Grid.Column="7">
+                <Button Classes="NoBackground"
+                        Command="{Binding DeleteSelectedOrLastRange}"
+                        HotKey="Delete">
+                    <StackPanel>
+                        <ToolTip.Tip>
+                            <TextBlock Classes="Default"
+                                       Text="Delete Selected or last" />
+                        </ToolTip.Tip>
+                        <PathIcon Classes="DeleteCancel"
+                                  Data="{DynamicResource DeleteIconData}" />
+                    </StackPanel>
+                </Button>
+                <Button Classes="NoBackground"
+                        Command="{Binding DeleteAllRanges}"
+                        HotKey="Alt+Delete">
+                    <StackPanel>
+                        <ToolTip.Tip>
+                            <TextBlock Classes="Default"
+                                       Text="Delete All" />
+                        </ToolTip.Tip>
+                        <PathIcon Classes="DeleteCancel"
+                                  Data="{DynamicResource DeleteAllIconData}" />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+        <TabControl Grid.Row="1">
+            <TabItem Classes="Default"
+                     Header="Ranges">
+                <DataGrid Classes="Default"
+                          x:Name="Ranges"
+                          ItemsSource="{Binding Ranges}"
+                          SelectedItem="{Binding SelectedRange}">
+                    <DataGrid.Styles>
+                        <Style Selector="DataGridColumnHeader">
+                            <Setter Property="FontFamily"
+                                    Value="Segoe UI" />
+                            <Setter Property="FontSize"
+                                    Value="16" />
+                            <Setter Property="HorizontalContentAlignment"
+                                    Value="Center" />
+                        </Style>
+                        <Style Selector="DataGridCell">
+                            <Setter Property="FontFamily"
+                                    Value="Segoe UI" />
+                            <Setter Property="FontSize"
+                                    Value="16" />
+                        </Style>
+                        <Style Selector="DataGridRow:nth-child(odd)">
+                            <Setter Property="Background"
+                                    Value="#010854" />
+                        </Style>
+                        <Style Selector="DataGridRow:nth-child(even)">
+                            <Setter Property="Background"
+                                    Value="#010533" />
+                        </Style>
+                    </DataGrid.Styles>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="DMX Start"
+                                            Width="*"
+                                            Binding="{Binding DmxStart}" />
+                        <DataGridTextColumn Header="Function"
+                                            Width="*"
+                                            Binding="{Binding Function}" />
+                        <DataGridTextColumn Header="Feature"
+                                            Width="*"
+                                            Binding="{Binding Feature}" />
+                        <DataGridTextColumn Header="Start"
+                                            Width="*"
+                                            Binding="{Binding Start}" />
+                        <DataGridTemplateColumn Header="Delete">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate DataType="types:Range">
+                                    <Button Classes="NoBackground"
+                                            Command="{Binding $parent[DataGrid].((vm:StringmapEditorViewModel)DataContext).DeleteRange}"
+                                            CommandParameter="{Binding .}">
+                                        <PathIcon Classes="DeleteCancel"
+                                                  Data="{DynamicResource DeleteIconData}" />
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Classes="Default"
+                     Header="Channel XML">
+                <TextBox Classes="Code"
+                         Text="{Binding ChannelXml}">
+                    <TextBox.InnerRightContent>
+                        <Button Classes="NoBackground"
+                                Command="{Binding CopyXmlText}"
+                                CommandParameter="{x:True}">
+                            <PathIcon Classes="Copy"
+                                      Data="{DynamicResource CopyIconData}" />
+                        </Button>
+                    </TextBox.InnerRightContent>
+                </TextBox>
+            </TabItem>
+            <TabItem Classes="Default"
+                     Header="Entries">
+                <DataGrid Classes="Default"
+                          ItemsSource="{Binding Entries}"
+                          SelectedItem="{Binding SelectEntry}">
+                    <DataGrid.Styles>
+                        <Style Selector="DataGridColumnHeader">
+                            <Setter Property="FontFamily"
+                                    Value="Segoe UI" />
+                            <Setter Property="FontSize"
+                                    Value="16" />
+                            <Setter Property="HorizontalContentAlignment"
+                                    Value="Center" />
+                        </Style>
+                        <Style Selector="DataGridCell">
+                            <Setter Property="FontFamily"
+                                    Value="Segoe UI" />
+                            <Setter Property="FontSize"
+                                    Value="16" />
+                        </Style>
+                        <Style Selector="DataGridRow:nth-child(odd)">
+                            <Setter Property="Background"
+                                    Value="#010854" />
+                        </Style>
+                        <Style Selector="DataGridRow:nth-child(even)">
+                            <Setter Property="Background"
+                                    Value="#010533" />
+                        </Style>
+                    </DataGrid.Styles>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Value"
+                                            Width="*"
+                                            Binding="{Binding Value}" />
+                        <DataGridTextColumn Header="Label"
+                                            Width="*"
+                                            Binding="{Binding Name}" />
+                        <DataGridTextColumn Header="Function"
+                                            Width="*"
+                                            Binding="{Binding Range.Function}" />
+                        <DataGridTextColumn Header="Feature"
+                                            Width="*"
+                                            Binding="{Binding Range.Feature}" />
+                        <DataGridTemplateColumn Header="Delete">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate DataType="types:Entry">
+                                    <Button Classes="NoBackground"
+                                            Command="{Binding $parent[DataGrid].((vm:StringmapEditorViewModel)DataContext).DeleteEntry}"
+                                            CommandParameter="{Binding .}">
+                                        <PathIcon Classes="DeleteCancel"
+                                                  Data="{DynamicResource DeleteIconData}" />
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Classes="Default"
+                     Header="Stringmap XML">
+                <TextBox Classes="Code"
+                         Text="{Binding StringmapXml}">
+                    <TextBox.InnerRightContent>
+                        <Button Classes="NoBackground"
+                                Command="{Binding CopyXmlText}"
+                                CommandParameter="{x:False}">
+                            <PathIcon Classes="Copy"
+                                      Data="{DynamicResource CopyIconData}" />
+                        </Button>
+                    </TextBox.InnerRightContent>
+                </TextBox>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

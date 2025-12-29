@@ -1,0 +1,353 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <!-- Add Controls for Previewer Here -->
+        </Border>
+    </Design.PreviewWith>
+    <!-- Stackpanel Styles -->
+    <Style Selector="StackPanel.Default">
+        <Setter Property="Margin"
+                Value="5" />
+    </Style>
+    <Style Selector="StackPanel.Horizontal">
+        <Setter Property="Orientation"
+                Value="Horizontal" />
+    </Style>
+    <Style Selector="StackPanel.HorizontalRightAligned">
+        <Setter Property="Orientation"
+                Value="Horizontal" />
+        <Setter Property="HorizontalAlignment"
+                Value="Right" />
+    </Style>
+    <!-- Grid Styles -->
+    <Style Selector="Grid.Default">
+        <Setter Property="Margin"
+                Value="4" />
+    </Style>
+    <Style Selector="Grid.VerticalAlignCenter">
+        <Setter Property="Margin"
+                Value="4" />
+        <Setter Property="VerticalAlignment"
+                Value="Center" />
+    </Style>
+    <!-- Label Styles -->
+    <Style Selector="Label.Default">
+        <Setter Property="Margin"
+                Value="4" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Center" />
+        <Setter Property="FontFamily"
+                Value="Segoe UI" />
+        <Setter Property="FontSize"
+                Value="16" />
+    </Style>
+    <Style Selector="Label.CenteredText">
+        <Setter Property="Margin"
+                Value="4" />
+        <Setter Property="HorizontalAlignment"
+                Value="Center" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Stretch" />
+        <Setter Property="FontFamily"
+                Value="Segoe UI" />
+        <Setter Property="FontSize"
+                Value="16" />
+    </Style>
+    <Style Selector="Label.CenteredTextWithBorder">
+        <Setter Property="Margin"
+                Value="4" />
+        <Setter Property="HorizontalAlignment"
+                Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment"
+                Value="Center" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Stretch" />
+        <Setter Property="FontFamily"
+                Value="Segoe UI" />
+        <Setter Property="FontSize"
+                Value="16" />
+        <Setter Property="BorderBrush"
+                Value="White" />
+        <Setter Property="BorderThickness"
+                Value="2" />
+    </Style>
+    <!-- TextBox Styles -->
+    <Style Selector="TextBox.Default">
+        <Setter Property="Margin"
+                Value="4" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Stretch" />
+        <Setter Property="FontFamily"
+                Value="Segoe UI" />
+        <Setter Property="FontSize"
+                Value="16" />
+        <Setter Property="ToolTip.Placement"
+                Value="Pointer" />
+    </Style>
+    <Style Selector="TextBox.Error">
+        <Setter Property="Margin"
+                Value="4" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Stretch" />
+        <Setter Property="FontFamily"
+                Value="Segoe UI" />
+        <Setter Property="FontSize"
+                Value="16" />
+        <Setter Property="BorderThickness"
+                Value="2" />
+        <Setter Property="BorderBrush"
+                Value="LightCoral" />
+        <Setter Property="ToolTip.Placement"
+                Value="Pointer" />
+    </Style>
+    <Style Selector="TextBox.Valid">
+        <Setter Property="Margin"
+                Value="4" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Stretch" />
+        <Setter Property="FontFamily"
+                Value="Segoe UI" />
+        <Setter Property="FontSize"
+                Value="16" />
+        <Setter Property="BorderThickness"
+                Value="2" />
+        <Setter Property="BorderBrush"
+                Value="LightGreen" />
+        <Setter Property="ToolTip.Placement"
+                Value="Pointer" />
+    </Style>
+    <Style Selector="TextBox.Code">
+        <Setter Property="Margin"
+                Value="4" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Stretch" />
+        <Setter Property="FontFamily"
+                Value="Segoe UI" />
+        <Setter Property="FontSize"
+                Value="16" />
+        <Setter Property="ToolTip.Placement"
+                Value="Pointer" />
+        <Setter Property="Focusable"
+                Value="False" />
+        <Setter Property="Background"
+                Value="#010533" />
+        <Setter Property="IsReadOnly"
+                Value="True" />
+    </Style>
+    <!-- Buttons Styles -->
+    <Style Selector="Button.Default">
+        <Setter Property="Margin"
+                Value="4" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment"
+                Value="Center" />
+        <Setter Property="FontFamily"
+                Value="Segoe UI" />
+        <Setter Property="FontSize"
+                Value="16" />
+        <Setter Property="ToolTip.Placement"
+                Value="Pointer" />
+    </Style>
+    <Style Selector="Button.NoBackground">
+        <Setter Property="Margin"
+                Value="4" />
+        <Setter Property="Background"
+                Value="Transparent" />
+        <Setter Property="ToolTip.Placement"
+                Value="Pointer" />
+    </Style>
+    <Style Selector="Button.Wide">
+        <Setter Property="Margin"
+                Value="4" />
+        <Setter Property="HorizontalAlignment"
+                Value="Stretch" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment"
+                Value="Center" />
+        <Setter Property="FontFamily"
+                Value="Segoe UI" />
+        <Setter Property="FontSize"
+                Value="16" />
+        <Setter Property="ToolTip.Placement"
+                Value="Pointer" />
+    </Style>
+    <!-- PathIcon Styles -->
+    <Style Selector="PathIcon.Okay">
+        <Setter Property="Margin"
+                Value="4" />
+        <Setter Property="Foreground"
+                Value="LightGreen" />
+    </Style>
+    <Style Selector="PathIcon.Error">
+        <Setter Property="Margin"
+                Value="4" />
+        <Setter Property="Foreground"
+                Value="LightCoral" />
+    </Style>
+    <Style Selector="PathIcon.Add">
+        <Setter Property="Margin"
+                Value="4" />
+        <Setter Property="Foreground"
+                Value="LightGreen" />
+    </Style>
+    <Style Selector="PathIcon.DeleteCancel">
+        <Setter Property="Margin"
+                Value="4" />
+        <Setter Property="Foreground"
+                Value="LightCoral" />
+    </Style>
+    <Style Selector="PathIcon.AddMultiple">
+        <Setter Property="Margin"
+                Value="4" />
+        <Setter Property="Foreground"
+                Value="#556fed" />
+    </Style>
+    <Style Selector="PathIcon.Copy">
+        <Setter Property="Margin"
+                Value="4" />
+        <Setter Property="Foreground"
+                Value="#5873f5" />
+    </Style>
+    <Style Selector="PathIcon.Save">
+        <Setter Property="Margin"
+                Value="4" />
+        <Setter Property="Foreground"
+                Value="#5873f5" />
+    </Style>
+    <!-- TextBlock Styles -->
+    <Style Selector="TextBlock.Default">
+        <Setter Property="Margin"
+                Value="4" />
+        <Setter Property="VerticalAlignment"
+                Value="Stretch" />
+        <Setter Property="FontFamily"
+                Value="Segoe UI" />
+        <Setter Property="FontSize"
+                Value="16" />
+    </Style>
+    <Style Selector="TextBlock.Center">
+        <Setter Property="Margin"
+                Value="4" />
+        <Setter Property="VerticalAlignment"
+                Value="Stretch" />
+        <Setter Property="HorizontalAlignment"
+                Value="Center" />
+        <Setter Property="FontFamily"
+                Value="Segoe UI" />
+        <Setter Property="FontSize"
+                Value="16" />
+    </Style>
+    <!-- Menu Styles -->
+    <Style Selector="Menu.Default">
+        <Setter Property="FontFamily"
+                Value="Segoe UI" />
+        <Setter Property="FontSize"
+                Value="16" />
+        <Setter Property="Background"
+                Value="#010854" />
+    </Style>
+    <!-- MenuItem Styles -->
+    <Style Selector="MenuItem.Default">
+        <Setter Property="FontFamily"
+                Value="Segoe UI" />
+        <Setter Property="FontSize"
+                Value="16" />
+        <Setter Property="Background"
+                Value="#010533" />
+    </Style>
+    <!-- DataGrid Styles -->
+    <Style Selector="DataGrid.Default">
+        <Setter Property="Margin"
+                Value="4" />
+    </Style>
+    <!-- ScrollViewer Styles -->
+    <Style Selector="ScrollViewer.Default">
+        <Setter Property="BringIntoViewOnFocusChange"
+                Value="False" />
+    </Style>
+    <!-- ComboBox Styles -->
+    <Style Selector="ComboBox.Default">
+        <Setter Property="Margin"
+                Value="4" />
+        <Setter Property="FontFamily"
+                Value="Segoe UI" />
+        <Setter Property="FontSize"
+                Value="16" />
+        <Setter Property="VerticalAlignment"
+                Value="Stretch" />
+        <Setter Property="ToolTip.Placement"
+                Value="Pointer" />
+    </Style>
+    <Style Selector="ComboBox.Error">
+        <Setter Property="Margin"
+                Value="4" />
+        <Setter Property="FontFamily"
+                Value="Segoe UI" />
+        <Setter Property="FontSize"
+                Value="16" />
+        <Setter Property="VerticalAlignment"
+                Value="Stretch" />
+        <Setter Property="BorderBrush"
+                Value="LightCoral" />
+        <Setter Property="BorderThickness"
+                Value="2" />
+        <Setter Property="ToolTip.Placement"
+                Value="Pointer" />
+    </Style>
+    <Style Selector="ComboBox.Valid">
+        <Setter Property="Margin"
+                Value="4" />
+        <Setter Property="FontFamily"
+                Value="Segoe UI" />
+        <Setter Property="FontSize"
+                Value="16" />
+        <Setter Property="VerticalAlignment"
+                Value="Stretch" />
+        <Setter Property="BorderBrush"
+                Value="LightGreen" />
+        <Setter Property="BorderThickness"
+                Value="2" />
+        <Setter Property="ToolTip.Placement"
+                Value="Pointer" />
+    </Style>
+    <Style Selector="ComboBox.Warning">
+        <Setter Property="Margin"
+                Value="4" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Stretch" />
+        <Setter Property="FontFamily"
+                Value="Segoe UI" />
+        <Setter Property="FontSize"
+                Value="16" />
+        <Setter Property="BorderThickness"
+                Value="2" />
+        <Setter Property="BorderBrush"
+                Value="#fff980" />
+        <Setter Property="ToolTip.Placement"
+                Value="Pointer" />
+    </Style>
+    <!-- TabItem Styles -->
+    <Style Selector="TabItem.Default">
+        <Setter Property="FontFamily"
+                Value="Segoe UI" />
+        <Setter Property="FontSize"
+                Value="16" />
+    </Style>
+    <!-- CheckBox Styles -->
+    <Style Selector="CheckBox.Default">
+        <Setter Property="Margin"
+                Value="5" />
+    </Style>
+    <!-- Border Styles -->
+    <Style Selector="Border.Default">
+        <Setter Property="Margin"
+                Value="5" />
+        <Setter Property="BorderBrush"
+                Value="#010854" />
+        <Setter Property="BorderThickness"
+                Value="5" />
+    </Style>
+</Styles>

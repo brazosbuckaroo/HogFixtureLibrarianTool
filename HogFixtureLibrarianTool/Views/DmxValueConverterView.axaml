@@ -1,0 +1,375 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:types="clr-namespace:HogFixtureLibrarianTool.Models.Types"
+             xmlns:vm="clr-namespace:HogFixtureLibrarianTool.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="HogFixtureLibrarianTool.Views.DmxValueConverterView"
+             x:DataType="vm:DmxValueConverterViewModel">
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:DmxValueConverterViewModel />
+    </Design.DataContext>
+    <TabControl>
+        <TabItem Classes="Default"
+                 Header="_8-Bit to 16-Bit Converter">
+            <Grid Classes="Default"
+                  ColumnDefinitions="auto,*,auto,*,auto,*,auto,*"
+                  RowDefinitions="auto,auto,*">
+                <Label Classes="Default"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       Content="DMX Start:" />
+                <TextBox Classes="Default"
+                         x:Name="DmxStartInput"
+                         Grid.Row="0"
+                         Grid.Column="1"
+                         Text="{Binding Range8BitDmxStartInput}">
+                    <ToolTip.Tip>
+                        <TextBlock Classes="Default"
+                                   x:Name="DmxStartInputToolTip" />
+                    </ToolTip.Tip>
+                </TextBox>
+                <Label Classes="Default"
+                       Grid.Row="0"
+                       Grid.Column="2"
+                       Content="DMX End:" />
+                <TextBox Classes="Default"
+                         x:Name="DmxEndInput"
+                         Grid.Row="0"
+                         Grid.Column="3"
+                         Text="{Binding Range8BitDmxEndInput}">
+                    <ToolTip.Tip>
+                        <TextBlock Classes="Default"
+                                   x:Name="DmxEndInputToolTip" />
+                    </ToolTip.Tip>
+                </TextBox>
+                <Label Classes="Default"
+                       Grid.Row="0"
+                       Grid.Column="4"
+                       Content="Function:" />
+                <ComboBox Classes="Default"
+                          x:Name="FunctionInput"
+                          Grid.Column="5"
+                          Grid.Row="0"
+                          ItemsSource="{Binding Functions}"
+                          SelectedItem="{Binding Range8BitFunctionInput}">
+                    <ToolTip.Tip>
+                        <TextBlock x:Name="FunctionInputToolTip"
+                                   Classes="Default" />
+                    </ToolTip.Tip>
+                </ComboBox>
+                <Label Classes="Default"
+                       Grid.Row="0"
+                       Grid.Column="6"
+                       Content="Feature:" />
+                <ComboBox Classes="Default"
+                          x:Name="FeatureInput"
+                          Grid.Column="7"
+                          Grid.Row="0"
+                          ItemsSource="{Binding Features}"
+                          SelectedItem="{Binding Range8BitFeatureInput}">
+                    <ToolTip.Tip>
+                        <TextBlock x:Name="FeatureInputToolTip"
+                                   Classes="Default" />
+                    </ToolTip.Tip>
+                </ComboBox>
+                <StackPanel Classes="Horizontal"
+                            Grid.Row="1"
+                            Grid.Column="0">
+                    <Button Classes="NoBackground"
+                            Command="{Binding Create16BitDmxRange}"
+                            HotKey="Enter">
+                        <PathIcon Classes="Add"
+                                  Data="{DynamicResource AddIconData}" />
+                    </Button>
+                    <Button Classes="NoBackground"
+                            Command="{Binding OpenAddMultipleDmxRangesDialog}"
+                            HotKey="Control+Enter">
+                        <StackPanel>
+                            <ToolTip.Tip>
+                                <TextBlock Classes="Default"
+                                           Text="Add multiple slots." />
+                            </ToolTip.Tip>
+                            <PathIcon Classes="AddMultiple"
+                                      Data="{DynamicResource AddMultipleIconData}" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+                <StackPanel Classes="HorizontalRightAligned"
+                            Grid.Row="1"
+                            Grid.Column="7">
+                    <Button Classes="NoBackground"
+                            Command="{Binding DeleteSelectedOrLast16BitRange}"
+                            HotKey="Delete">
+                        <StackPanel>
+                            <ToolTip.Tip>
+                                <TextBlock Classes="Default"
+                                           Text="Delete selected or delete last" />
+                            </ToolTip.Tip>
+                            <PathIcon Classes="DeleteCancel"
+                                      Data="{DynamicResource DeleteIconData}" />
+                        </StackPanel>
+                    </Button>
+                    <Button Classes="NoBackground"
+                            Command="{Binding DeleteAll16BitRanges}"
+                            HotKey="Alt+Delete">
+                        <StackPanel>
+                            <ToolTip.Tip>
+                                <TextBlock Classes="Default"
+                                           Text="Delete All" />
+                            </ToolTip.Tip>
+                            <PathIcon Classes="DeleteCancel"
+                                      Data="{DynamicResource DeleteAllIconData}" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+                <DataGrid Classes="Default"
+                          Grid.Column="0"
+                          Grid.Row="2"
+                          Grid.ColumnSpan="8"
+                          x:Name="Ranges"
+                          ItemsSource="{Binding Ranges16Bit}"
+                          SelectedItem="{Binding Selected16BitRange}">
+                    <DataGrid.Styles>
+                        <Style Selector="DataGridColumnHeader">
+                            <Setter Property="FontFamily"
+                                    Value="Segoe UI" />
+                            <Setter Property="FontSize"
+                                    Value="16" />
+                            <Setter Property="HorizontalContentAlignment"
+                                    Value="Center" />
+                        </Style>
+                        <Style Selector="DataGridCell">
+                            <Setter Property="FontFamily"
+                                    Value="Segoe UI" />
+                            <Setter Property="FontSize"
+                                    Value="16" />
+                        </Style>
+                        <Style Selector="DataGridRow:nth-child(odd)">
+                            <Setter Property="Background"
+                                    Value="#010854" />
+                        </Style>
+                        <Style Selector="DataGridRow:nth-child(even)">
+                            <Setter Property="Background"
+                                    Value="#010533" />
+                        </Style>
+                    </DataGrid.Styles>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="DMX Start"
+                                            Width="*"
+                                            Binding="{Binding DmxStart}" />
+                        <DataGridTextColumn Header="DMX Mid One"
+                                            Width="*"
+                                            Binding="{Binding DmxMidOne}" />
+                        <DataGridTextColumn Header="DMX Mid Two"
+                                            Width="*"
+                                            Binding="{Binding DmxMidTwo}" />
+                        <DataGridTextColumn Header="DMX End"
+                                            Width="*"
+                                            Binding="{Binding DmxEnd}" />
+                        <DataGridTextColumn Header="Function"
+                                            Width="*"
+                                            Binding="{Binding Function}" />
+                        <DataGridTextColumn Header="Feature"
+                                            Width="*"
+                                            Binding="{Binding Feature}" />
+                        <DataGridTemplateColumn Header="Delete"
+                                                Width="auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate DataType="types:Range">
+                                    <Button Classes="NoBackground"
+                                            Command="{Binding $parent[DataGrid].((vm:DmxValueConverterViewModel)DataContext).Delete16BitDmxRange}"
+                                            CommandParameter="{Binding .}">
+                                        <PathIcon Classes="DeleteCancel"
+                                                  Data="{DynamicResource DeleteIconData}" />
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </TabItem>
+        <TabItem Classes="Default"
+                 Header="_16-Bit to 8-Bit Value Converter">
+            <Grid Classes="Default"
+                  ColumnDefinitions="auto,*,auto,*,auto,*,auto,*"
+                  RowDefinitions="auto,auto,*">
+                <Label Classes="Default"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       Content="DMX Start:" />
+                <TextBox Classes="Default"
+                         x:Name="SixteenBitDmxStartInput"
+                         Grid.Row="0"
+                         Grid.Column="1"
+                         Text="{Binding Range16BitDmxStartInput}">
+                    <ToolTip.Tip>
+                        <TextBlock Classes="Default"
+                                   x:Name="SixteenBitDmxStartInputToolTip" />
+                    </ToolTip.Tip>
+                </TextBox>
+                <Label Classes="Default"
+                       Grid.Row="0"
+                       Grid.Column="2"
+                       Content="DMX End:" />
+                <TextBox Classes="Default"
+                         x:Name="SixteenBitDmxEndInput"
+                         Grid.Row="0"
+                         Grid.Column="3"
+                         Text="{Binding Range16BitDmxEndInput}">
+                    <ToolTip.Tip>
+                        <TextBlock Classes="Default"
+                                   x:Name="SixteenBitDmxEndInputToolTip" />
+                    </ToolTip.Tip>
+                </TextBox>
+                <Label Classes="Default"
+                       Grid.Row="0"
+                       Grid.Column="4"
+                       Content="Function:" />
+                <ComboBox Classes="Default"
+                          x:Name="SixteenBitFunctionInput"
+                          Grid.Row="0"
+                          Grid.Column="5"
+                          ItemsSource="{Binding Functions}"
+                          SelectedItem="{Binding Range16BitFunctionInput}">
+                    <ToolTip.Tip>
+                        <TextBlock x:Name="SixteenBitFunctionInputToolTip"
+                                   Classes="Default" />
+                    </ToolTip.Tip>
+                </ComboBox>
+                <Label Classes="Default"
+                       Grid.Row="0"
+                       Grid.Column="6"
+                       Content="Feature:" />
+                <ComboBox Classes="Default"
+                          x:Name="SixteenBitFeatureInput"
+                          Grid.Row="0"
+                          Grid.Column="7"
+                          ItemsSource="{Binding Features}"
+                          SelectedItem="{Binding Range16BitFeatureInput}">
+                    <ToolTip.Tip>
+                        <TextBlock x:Name="SixteenBitFeatureInputToolTip"
+                                   Classes="Default" />
+                    </ToolTip.Tip>
+                </ComboBox>
+                <StackPanel Classes="Horizontal"
+                            Grid.Row="1"
+                            Grid.Column="0">
+                    <Button Classes="NoBackground"
+                            Command="{Binding Create8BitDmxRange}"
+                            HotKey="Enter">
+                        <PathIcon Classes="Add"
+                                  Data="{DynamicResource AddIconData}" />
+                    </Button>
+                    <Button Classes="NoBackground"
+                            Command="{Binding OpenAddMultipleDmxRangesDialog}"
+                            HotKey="Control+Shift+Enter">
+                        <Button.CommandParameter>
+                            <sys:Boolean>true</sys:Boolean>
+                        </Button.CommandParameter>
+                        <StackPanel>
+                            <ToolTip.Tip>
+                                <TextBlock Classes="Default"
+                                           Text="Add multiple slots." />
+                            </ToolTip.Tip>
+                            <PathIcon Classes="AddMultiple"
+                                      Data="{DynamicResource AddMultipleIconData}" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+                <StackPanel Classes="HorizontalRightAligned"
+                            Grid.Row="1"
+                            Grid.Column="7">
+                    <Button Classes="NoBackground"
+                            Command="{Binding DeleteSelectedOrLast8BitRange}"
+                            HotKey="Shift+Delete">
+                        <StackPanel>
+                            <ToolTip.Tip>
+                                <TextBlock Classes="Default"
+                                           Text="Delete selected or delete last" />
+                            </ToolTip.Tip>
+                            <PathIcon Classes="DeleteCancel"
+                                      Data="{DynamicResource DeleteIconData}" />
+                        </StackPanel>
+                    </Button>
+                    <Button Classes="NoBackground"
+                            Command="{Binding DeleteAll8BitRanges}"
+                            HotKey="Shift+Alt+Delete">
+                        <StackPanel>
+                            <ToolTip.Tip>
+                                <TextBlock Classes="Default"
+                                           Text="Delete All" />
+                            </ToolTip.Tip>
+                            <PathIcon Classes="DeleteCancel"
+                                      Data="{DynamicResource DeleteAllIconData}" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+                <DataGrid Classes="Default"
+                          Grid.Column="0"
+                          Grid.Row="2"
+                          Grid.ColumnSpan="8"
+                          x:Name="Ranges16Bit"
+                          ItemsSource="{Binding Ranges8Bit}"
+                          SelectedItem="{Binding Selected8BitRange}">
+                    <DataGrid.Styles>
+                        <Style Selector="DataGridColumnHeader">
+                            <Setter Property="FontFamily"
+                                    Value="Segoe UI" />
+                            <Setter Property="FontSize"
+                                    Value="16" />
+                            <Setter Property="HorizontalContentAlignment"
+                                    Value="Center" />
+                        </Style>
+                        <Style Selector="DataGridCell">
+                            <Setter Property="FontFamily"
+                                    Value="Segoe UI" />
+                            <Setter Property="FontSize"
+                                    Value="16" />
+                        </Style>
+                        <Style Selector="DataGridRow:nth-child(odd)">
+                            <Setter Property="Background"
+                                    Value="#010854" />
+                        </Style>
+                        <Style Selector="DataGridRow:nth-child(even)">
+                            <Setter Property="Background"
+                                    Value="#010533" />
+                        </Style>
+                    </DataGrid.Styles>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="DMX Start"
+                                            Width="*"
+                                            Binding="{Binding DmxStart}" />
+                        <DataGridTextColumn Header="DMX End"
+                                            Width="*"
+                                            Binding="{Binding DmxEnd}" />
+                        <DataGridTextColumn Header="Function"
+                                            Width="*"
+                                            Binding="{Binding Function}" />
+                        <DataGridTextColumn Header="Feature"
+                                            Width="*"
+                                            Binding="{Binding Feature}" />
+                        <DataGridTemplateColumn Header="Delete"
+                                                Width="auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate DataType="types:Range">
+                                    <Button Classes="NoBackground"
+                                            Command="{Binding $parent[DataGrid].((vm:DmxValueConverterViewModel)DataContext).Delete8BitDmxRange}"
+                                            CommandParameter="{Binding .}">
+                                        <PathIcon Classes="DeleteCancel"
+                                                  Data="{DynamicResource DeleteIconData}" />
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </TabItem>
+    </TabControl>
+</UserControl>

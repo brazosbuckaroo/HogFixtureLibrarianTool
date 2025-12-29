@@ -1,0 +1,141 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:HogFixtureLibrarianTool.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="350"
+        Width="400"
+        Height="350"
+        CanResize="False"
+        x:Class="HogFixtureLibrarianTool.Views.AddMultipleRangesWindow"
+        x:DataType="vm:AddMultipleRangesWindowViewModel"
+        WindowStartupLocation="CenterOwner"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="Add Multiple Ranges">
+    <Design.DataContext>
+        <vm:AddMultipleRangesWindowViewModel />
+    </Design.DataContext>
+    <Grid Classes="Default"
+          RowDefinitions="*, auto">
+        <TabControl Classes="Default"
+                    Grid.Row="0">
+            <TabItem Classes="Default"
+                     Header="Basic">
+                <ScrollViewer Classes="Default">
+                    <Grid Classes="VerticalAlignCenter"
+                          ColumnDefinitions="*,*"
+                          RowDefinitions="auto,auto,auto,auto,auto,auto,auto">
+                        <Label Classes="Default"
+                               Grid.Row="0"
+                               Grid.Column="0"
+                               Content="DMX Offset:" />
+                        <TextBox Classes="Default"
+                                 x:Name="DmxOffsetInput"
+                                 Grid.Row="0"
+                                 Grid.Column="1"
+                                 Text="{Binding DmxOffset}">
+                            <ToolTip.Tip>
+                                <TextBlock Classes="Default"
+                                           x:Name="DmxOffsetToolTip" />
+                            </ToolTip.Tip>
+                        </TextBox>
+                        <Label Classes="Default"
+                               Grid.Row="1"
+                               Grid.Column="0"
+                               Content="Number of Ranges:" />
+                        <TextBox Classes="Default"
+                                 x:Name="NumberOfRangesInput"
+                                 Grid.Row="1"
+                                 Grid.Column="1"
+                                 Text="{Binding NumberOfRanges}">
+                            <ToolTip.Tip>
+                                <TextBlock Classes="Default"
+                                           x:Name="NumberOfRangesToolTip" />
+                            </ToolTip.Tip>
+                        </TextBox>
+                        <Label Classes="Default"
+                               Grid.Row="2"
+                               Grid.Column="0"
+                               Content="DMX Start:" />
+                        <TextBox Classes="Default"
+                                 x:Name="EightBitDmxValueInput"
+                                 Grid.Row="2"
+                                 Grid.Column="1"
+                                 Text="{Binding DmxStartValue}">
+                            <ToolTip.Tip>
+                                <TextBlock Classes="Default"
+                                           x:Name="EightBitDmxValueToolTip" />
+                            </ToolTip.Tip>
+                        </TextBox>
+                        <Label Classes="Default"
+                               Grid.Row="3"
+                               Grid.Column="0"
+                               Content="Function" />
+                        <ComboBox Classes="Default"
+                                  x:Name="FunctionInput"
+                                  ItemsSource="{Binding Functions}"
+                                  SelectedItem="{Binding SelectedFunction}"
+                                  Grid.Row="3"
+                                  Grid.Column="1">
+                            <ToolTip.Tip>
+                                <TextBlock Classes="Default"
+                                           x:Name="FunctionInputToolTip" />
+                            </ToolTip.Tip>
+                        </ComboBox>
+                        <Label Classes="Default"
+                               Grid.Row="4"
+                               Grid.Column="0"
+                               Content="Feature" />
+                        <ComboBox Classes="Default"
+                                  x:Name="FeatureInput"
+                                  ItemsSource="{Binding Features}"
+                                  SelectedItem="{Binding SelectedFeature}"
+                                  Grid.Row="4"
+                                  Grid.Column="1">
+                            <ToolTip.Tip>
+                                <TextBlock Classes="Default"
+                                           x:Name="FeatureInputToolTip" />
+                            </ToolTip.Tip>
+                        </ComboBox>
+                        <Label Classes="Default"
+                               Grid.Row="5"
+                               Grid.Column="0"
+                               Content="Include End Value:" />
+                        <CheckBox Classes="Default"
+                                  Grid.Row="5"
+                                  Grid.Column="1"
+                                  IsChecked="{Binding IncludeEndValue}" />
+                    </Grid>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Classes="Default"
+                     Header="Advanced" />
+        </TabControl>
+        <Grid Classes="Default"
+              Grid.Row="1"
+              ColumnDefinitions="*, *">
+            <Button Classes="Wide"
+                    Grid.Column="0"
+                    Command="{Binding GenerateMultipleAdds}"
+                    HotKey="Enter">
+                <StackPanel Classes="Horizontal">
+                    <Label Classes="Default"
+                           Content="Generate" />
+                    <PathIcon Classes="Add"
+                              Data="{DynamicResource GenerateIconData}" />
+                </StackPanel>
+            </Button>
+            <Button Classes="Wide"
+                    Grid.Column="1"
+                    Command="{Binding CancelMultipleAdds}"
+                    HotKey="Escape">
+                <StackPanel Classes="Horizontal">
+                    <Label Classes="Default"
+                           Content="Cancel" />
+                    <PathIcon Classes="DeleteCancel"
+                              Data="{DynamicResource CancelMultipleAddsIconData}" />
+                </StackPanel>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

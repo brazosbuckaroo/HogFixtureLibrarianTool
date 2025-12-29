@@ -1,0 +1,31 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:HogFixtureLibrarianTool.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
+        Width="400"
+        Height="450"
+        CanResize="False"
+        WindowStartupLocation="CenterOwner"
+        x:Class="HogFixtureLibrarianTool.Views.AboutWindow"
+        x:DataType="vm:AboutWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="About">
+    <Design.DataContext>
+        <vm:AboutWindowViewModel />
+    </Design.DataContext>
+    <StackPanel Classes="Default">
+        <TextBlock Classes="Center"
+                   Text="{Binding SoftwareName}" />
+        <TextBlock Classes="Center"
+                   Text="{Binding SoftwareVersion}" />
+        <Label Classes="Default"
+               Content="Authors:" />
+        <Border Classes="Default">
+            <TextBlock Classes="Default"
+                       Height="300"
+                       Text="{Binding Authors}" />
+        </Border>
+    </StackPanel>
+</Window>

@@ -1,0 +1,68 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <LangVersion>default</LangVersion>
+        <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+        <Company>dtlighting</Company>
+        <Product>Hog Fixture Librarian Tool</Product>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+        <Authors>dtl</Authors>
+        <FileVersion>1.0.0.0</FileVersion>
+        <IsPackable>false</IsPackable>
+        <PackageId>HogFixtureLibrarianTool</PackageId>
+        <Version>1.0.0.0</Version>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+        <PlatformTarget>x64</PlatformTarget>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <AvaloniaResource Include="Assets\**"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <AvaloniaXaml Remove="Assets\AppStyles.axaml"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Avalonia" Version="11.3.10"/>
+        <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.3.10"/>
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.10"/>
+        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.10"/>
+        <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.3.10"/>
+        <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.1" />
+        <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="10.0.1" />
+        <PackageReference Include="ReactiveUI.Avalonia" Version="11.3.8"/>
+        <PackageReference Include="ReactiveUI.Validation" Version="6.0.18"/>
+        <PackageReference Include="SharpHook" Version="7.1.0"/>
+        <PackageReference Include="System.Data.SQLite" Version="2.0.2"/>
+        <PackageReference Include="System.Drawing.Common" Version="10.0.1"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <AvaloniaResource Update="Assets\AppStyles.axaml">
+            <SubType>Designer</SubType>
+        </AvaloniaResource>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Update="Views\AddMultipleRangesWindow.axaml.cs">
+            <DependentUpon>AddMultipleRangesWindow.axaml</DependentUpon>
+        </Compile>
+        <Compile Update="Views\DmxValueConverterView.axaml.cs">
+            <DependentUpon>DmxValueConverterView.axaml</DependentUpon>
+        </Compile>
+        <Compile Update="Views\GuidGeneratorView.axaml.cs">
+            <DependentUpon>GuidGeneratorView.axaml</DependentUpon>
+        </Compile>
+        <Compile Update="Views\AddMultipleFixtureModesWindow.axaml.cs">
+            <DependentUpon>AddMultipleFixtureModesWindow.axaml</DependentUpon>
+        </Compile>
+        <Compile Update="Views\StringmapEditorView.axaml.cs">
+            <DependentUpon>StringmapEditorView.axaml</DependentUpon>
+        </Compile>
+    </ItemGroup>
+</Project>

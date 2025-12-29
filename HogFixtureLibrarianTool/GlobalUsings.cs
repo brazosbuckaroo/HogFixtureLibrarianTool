@@ -1,0 +1,37 @@
+﻿global using Avalonia;
+global using Avalonia.Controls.ApplicationLifetimes;
+global using Avalonia.Controls;
+global using Avalonia.Markup.Xaml;
+global using Avalonia.Threading;
+global using DynamicData;
+global using DynamicData.Binding;
+global using HogFixtureLibrarianTool.Models.Types;
+global using HogFixtureLibrarianTool.Models.Interfaces;
+global using HogFixtureLibrarianTool.ViewModels;
+global using HogFixtureLibrarianTool.Views;
+global using SharpHook;
+global using SharpHook.Data;
+global using System;
+global using System.Collections.Generic;
+global using System.Collections.ObjectModel;
+global using System.Data.SQLite;
+global using System.Diagnostics;
+global using System.IO;
+global using System.Linq;
+global using System.Reactive;
+global using System.Reactive.Disposables.Fluent;
+global using System.Reactive.Linq;
+global using System.Reflection;
+global using System.Text;
+global using System.Threading;
+global using System.Threading.Tasks;
+global using System.Xml;
+global using System.Xml.Serialization;
+global using ReactiveUI;
+global using ReactiveUI.Avalonia;
+global using ReactiveUI.Validation.Abstractions;
+global using ReactiveUI.Validation.Contexts;
+global using ReactiveUI.Validation.States;
+
+// aliases
+global using HogRange = HogFixtureLibrarianTool.Models.Types.Range;

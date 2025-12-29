@@ -1,0 +1,66 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:HogFixtureLibrarianTool.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
+        Width="400"
+        Height="450"
+        CanResize="False"
+        x:Class="HogFixtureLibrarianTool.Views.ApplicationPreferencesWindow"
+        x:DataType="vm:ApplicationPreferencesWindowViewModel"
+        Title="Preferences"
+        WindowStartupLocation="CenterOwner"
+        Icon="/Assets/avalonia-logo.ico">
+    <Design.DataContext>
+        <vm:ApplicationPreferencesWindowViewModel />
+    </Design.DataContext>
+    <Grid Classes="Default"
+          RowDefinitions="auto, auto"
+          ColumnDefinitions="*,*,*">
+        <Label Classes="Default"
+               Grid.Row="0"
+               Grid.Column="0"
+               Grid.ColumnSpan="2"
+               Content="Use Hog V3 XML:" />
+        <CheckBox Classes="Default"
+                  Grid.Row="0"
+                  Grid.Column="2"
+                  IsChecked="{Binding UseHogV3}" />
+        <Button Classes="Wide"
+                Grid.Row="1"
+                Grid.Column="0"
+                Command="{Binding ApplySettings}"
+                HotKey="Enter">
+            <StackPanel Classes="Horizontal">
+                <Label Classes="Default"
+                       Content="Confirm" />
+                <PathIcon Classes="Okay"
+                          Data="{DynamicResource ConfirmIconData}" />
+            </StackPanel>
+        </Button>
+        <Button Classes="Wide"
+                Grid.Row="1"
+                Grid.Column="1"
+                Command="{Binding SaveSettings}">
+            <StackPanel Classes="Horizontal">
+                <Label Classes="Default"
+                       Content="Save" />
+                <PathIcon Classes="Save"
+                          Data="{DynamicResource SaveIconData}" />
+            </StackPanel>
+        </Button>
+        <Button Classes="Wide"
+                Grid.Row="1"
+                Grid.Column="2"
+                Command="{Binding CancelChanges}"
+                HotKey="Escape">
+            <StackPanel Classes="Horizontal">
+                <Label Classes="Default"
+                       Content="Cancel" />
+                <PathIcon Classes="DeleteCancel"
+                          Data="{DynamicResource CancelIconData}" />
+            </StackPanel>
+        </Button>
+    </Grid>
+</Window>

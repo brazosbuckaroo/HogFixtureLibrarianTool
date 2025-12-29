@@ -1,0 +1,71 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:rxui="http://reactiveui.net"
+        xmlns:vm="clr-namespace:HogFixtureLibrarianTool.ViewModels"
+        xmlns:types="clr-namespace:HogFixtureLibrarianTool.Models.Types"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="HogFixtureLibrarianTool.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico">
+    <Window.Styles>
+        <Style Selector="MenuItem:open /template/ Popup#PART_Popup > Border">
+            <Setter Property="Background" Value="#010533" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="0" />
+        </Style>
+    </Window.Styles>
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel />
+    </Design.DataContext>
+    <Grid RowDefinitions="auto,*">
+        <DockPanel Grid.Row="0"
+                   DockPanel.Dock="Top">
+            <Menu Classes="Default">
+                <MenuItem Classes="Default"
+                          Header="_File" />
+                <MenuItem Classes="Default"
+                          Header="_Edit">
+                    <MenuItem Classes="Default"
+                              Header="_Preferences"
+                              HotKey="Alt+P"
+                              InputGesture="Alt+P"
+                              Command="{Binding OpenPreferences}" />
+                </MenuItem>
+                <MenuItem Classes="Default"
+                          Header="_Workspace">
+                    <MenuItem Classes="Default"
+                              Header="_DMX Value Converter"
+                              Command="{Binding GoToDmxValueConverter}"
+                              HotKey="F1"
+                              InputGesture="F1" />
+                    <MenuItem Classes="Default"
+                              Header="_GUID Generator"
+                              Command="{Binding GoToGuidGenerator}"
+                              HotKey="F2"
+                              InputGesture="F2" />
+                    <MenuItem Classes="Default"
+                              Header="_Stringmap Editor"
+                              Command="{Binding GoToStringMapEditor}"
+                              HotKey="F3"
+                              InputGesture="F3" />
+                </MenuItem>
+                <MenuItem Classes="Default"
+                          Header="_Help">
+                    <MenuItem Classes="Default"
+                              Header="_About"
+                              Command="{Binding OpenAbout}" />
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        <rxui:RoutedViewHost Grid.Row="1"
+                             Router="{Binding Router}">
+            <rxui:RoutedViewHost.ViewLocator>
+                <types:AppViewLocator />
+            </rxui:RoutedViewHost.ViewLocator>
+        </rxui:RoutedViewHost>
+    </Grid>
+</Window>

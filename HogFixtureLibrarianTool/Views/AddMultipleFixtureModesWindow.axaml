@@ -1,0 +1,60 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:HogFixtureLibrarianTool.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="150"
+        Height="150"
+        Width="400"
+        CanResize="False"
+        x:Class="HogFixtureLibrarianTool.Views.AddMultipleFixtureModesWindow"
+        x:DataType="vm:AddMultipleFixtureModesWindowViewModel"
+        WindowStartupLocation="CenterOwner"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="Add Multiple Fixture Modes">
+    <Design.DataContext>
+        <vm:AddMultipleFixtureModesWindowViewModel />
+    </Design.DataContext>
+    <Grid Classes="VerticalAlignCenter"
+          ColumnDefinitions="*,*"
+          RowDefinitions="auto,auto">
+        <Label Classes="Default"
+               Grid.Row="0"
+               Grid.Column="0"
+               Content="Number of Fixture Modes:" />
+        <TextBox Classes="Default"
+                 x:Name="NumberOfFixtureModesInput"
+                 Grid.Row="0"
+                 Grid.Column="1"
+                 Text="{Binding NumberOfFixtureModes}">
+            <ToolTip.Tip>
+                <TextBlock Classes="Default"
+                           x:Name="NumberOfFixtureModesInputToolTip" />
+            </ToolTip.Tip>
+        </TextBox>
+        <Button Classes="Wide"
+                Grid.Row="1"
+                Grid.Column="0"
+                Command="{Binding GenerateFixtureModes}"
+                HotKey="Enter">
+            <StackPanel Classes="Horizontal">
+                <Label Classes="Default"
+                       Content="Generate" />
+                <PathIcon Classes="Add"
+                          Data="{DynamicResource GenerateIconData}" />
+            </StackPanel>
+        </Button>
+        <Button Classes="Wide"
+                Grid.Row="1"
+                Grid.Column="1"
+                Command="{Binding CancelMultipleAdds}"
+                HotKey="Escape">
+            <StackPanel Classes="Horizontal">
+                <Label Classes="Default"
+                       Content="Cancel" />
+                <PathIcon Classes="DeleteCancel"
+                          Data="{DynamicResource CancelMultipleAddsIconData}" />
+            </StackPanel>
+        </Button>
+    </Grid>
+</Window>
