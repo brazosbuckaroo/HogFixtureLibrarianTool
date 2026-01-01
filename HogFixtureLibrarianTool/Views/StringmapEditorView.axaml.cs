@@ -25,22 +25,16 @@ public partial class StringmapEditorView : ReactiveUserControl<StringmapEditorVi
 
         DmxStartToolTip.Text = rangeDmxStartState.Text.ToSingleLine();
 
-        if (rangeDmxStartState.IsValid)
-            DmxStartInput.Classes.Set("Valid", true);
-        else
-            DmxStartInput.Classes.Set("Error", true);
+        DmxStartInput.Classes.Set(rangeDmxStartState.IsValid ? "Valid" : "Error", true);
     }
 
-    private void UpdateRangeFunction(IValidationState rangeFuntionState)
+    private void UpdateRangeFunction(IValidationState rangeFunctionState)
     {
         RangeFunctionInput.Classes.Clear();
 
-        RangeFunctionToolTip.Text = rangeFuntionState.Text.ToSingleLine();
+        RangeFunctionToolTip.Text = rangeFunctionState.Text.ToSingleLine();
 
-        if (rangeFuntionState.IsValid)
-            RangeFunctionInput.Classes.Set("Valid", true);
-        else
-            RangeFunctionInput.Classes.Set("Error", true);
+        RangeFeatureInput.Classes.Set(rangeFunctionState.IsValid ? "Valid" : "Error", true);
     }
 
     private void UpdateRangeFeature(IValidationState rangeFeatureState)
@@ -49,10 +43,7 @@ public partial class StringmapEditorView : ReactiveUserControl<StringmapEditorVi
 
         RangeFeatureToolTip.Text = rangeFeatureState.Text.ToSingleLine();
 
-        if (rangeFeatureState.IsValid)
-            RangeFeatureInput.Classes.Set("Valid", true);
-        else
-            RangeFeatureInput.Classes.Set("Error", true);
+        RangeFeatureInput.Classes.Set(rangeFeatureState.IsValid ? "Valid" : "Error", true);
     }
 
     private void UpdateRangeStart(IValidationState rangeStartState)
@@ -61,9 +52,6 @@ public partial class StringmapEditorView : ReactiveUserControl<StringmapEditorVi
 
         StartToolTip.Text = rangeStartState.Text.ToSingleLine();
 
-        if (rangeStartState.IsValid)
-            StartInput.Classes.Set("Valid", true);
-        else
-            StartInput.Classes.Set("Error", true);
+        StartToolTip.Classes.Set(rangeStartState.IsValid ? "Valid" : "Error", true);
     }
 }

@@ -109,13 +109,7 @@ public class GuidGeneratorViewModel : RoutableViewModelBase
 
     private void GenerateGuidCommand()
     {
-        var modeLabel = string.Empty;
-
-        if (string.IsNullOrEmpty(ModeName))
-            modeLabel = $"Mode {FixtureModes.Count}";
-        else
-            modeLabel = ModeName;
-
+        var modeLabel = string.IsNullOrEmpty(ModeName) ? $"Mode {FixtureModes.Count}" : ModeName;
         var modeGuid = Guid.NewGuid();
         var mode = new FixtureMode(modeLabel,
             modeGuid);

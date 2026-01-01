@@ -44,7 +44,7 @@ public class HogDmxValidator : IDmxValidator
         return new ValidationState(true, "Valid");
     }
 
-    public bool TryConvertDmxStringToIntegers(Range range, out int? dmxStart, out int? dmxEnd,
+    public bool TryConvertDmxStringToIntegers(HogRange range, out int? dmxStart, out int? dmxEnd,
         bool is16Bit = false)
     {
         dmxStart = null;

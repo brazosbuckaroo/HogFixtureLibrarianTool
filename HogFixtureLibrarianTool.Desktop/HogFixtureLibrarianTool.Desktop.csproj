@@ -15,10 +15,10 @@
         <Product>Hog Fixture Librarian Tool</Product>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-      <PlatformTarget>AnyCPU</PlatformTarget>
+        <PlatformTarget>AnyCPU</PlatformTarget>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-      <PlatformTarget>AnyCPU</PlatformTarget>
+        <PlatformTarget>AnyCPU</PlatformTarget>
     </PropertyGroup>
 
     <ItemGroup>

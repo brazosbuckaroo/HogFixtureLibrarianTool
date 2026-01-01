@@ -7,8 +7,10 @@ public class XmlManager : IXmlReaderWriter
 
     public XmlManager()
     {
-        _settings = new XmlReaderSettings();
-        _settings.Async = true;
+        _settings = new XmlReaderSettings
+        {
+            Async = true
+        };
         _emptyNamespace = new XmlSerializerNamespaces();
         _emptyNamespace.Add(string.Empty, string.Empty);
     }
@@ -18,17 +20,14 @@ public class XmlManager : IXmlReaderWriter
         var xmlSerializer = new XmlSerializer(data.GetType());
         var xmlString = string.Empty;
 
-        await using (var stream = new MemoryStream())
-        {
-            xmlSerializer.Serialize(stream, data, _emptyNamespace);
+        await using var stream = new MemoryStream();
+        xmlSerializer.Serialize(stream, data, _emptyNamespace);
 
-            stream.Position = 0; // resetting to read XML
+        stream.Position = 0; // resetting to read XML
 
-            using (var reader = XmlReader.Create(stream, _settings))
-            {
-                while (await reader.ReadAsync()) xmlString = await reader.ReadOuterXmlAsync();
-            }
-        }
+        using var reader = XmlReader.Create(stream, _settings);
+        
+        while (await reader.ReadAsync()) xmlString = await reader.ReadOuterXmlAsync();
 
         return xmlString;
     }
@@ -39,10 +38,8 @@ public class XmlManager : IXmlReaderWriter
 
         try
         {
-            await using (var stream = File.Create(filePath))
-            {
-                xmlSerializer.Serialize(stream, data);
-            }
+            await using var stream = File.Create(filePath);
+            xmlSerializer.Serialize(stream, data);
         }
         catch (InvalidOperationException)
         {
@@ -61,10 +58,8 @@ public class XmlManager : IXmlReaderWriter
 
         try
         {
-            await using (var stream = File.Open(filePath, FileMode.Open))
-            {
-                data = (T?)xmlSerializer.Deserialize(stream);
-            }
+            await using var stream = File.Open(filePath, FileMode.Open);
+            data = (T?)xmlSerializer.Deserialize(stream);
         }
         catch (XmlException)
         {

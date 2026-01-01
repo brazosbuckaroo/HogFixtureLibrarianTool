@@ -409,8 +409,9 @@ public class StringmapEditorViewModel : RoutableViewModelBase
 
             foreach (var range in groupedRanges)
             {
-                var func = new FunctionReference(range.Function, range.Feature);
-                var definition = new Definition(range.Function == null ? string.Empty : range.Function.ToLower(), func);
+                var func = new FunctionReference(range.FunctionName, range.FeatureName);
+                var definition =
+                    new Definition(range.FunctionName == null ? string.Empty : range.FunctionName.ToLower(), func);
                 var preview = new FunctionPreview(definition,
                     Entries.Where(entry => AreRangesTheSame(entry, range))
                         .ToList());

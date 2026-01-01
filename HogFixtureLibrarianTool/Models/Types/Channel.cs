@@ -3,12 +3,12 @@
 [Serializable]
 public record Channel(
     int Number,
-    List<Range> Ranges,
+    List<HogRange> Ranges,
     int Constant = -1,
     bool Unused = false)
     : IHogData, INoNamespaceData
 {
-    public Channel() : this(default, new List<Range>())
+    public Channel() : this(default, new List<HogRange>())
     {
     }
 
@@ -21,7 +21,7 @@ public record Channel(
     [XmlAttribute(AttributeName = "unused", DataType = "boolean")]
     public bool Unused { get; set; } = Unused;
 
-    [XmlArray] public List<Range> Ranges { get; set; } = Ranges;
+    [XmlArray] public List<HogRange> Ranges { get; set; } = Ranges;
 
     public bool ShouldSerializeConstant()
     {

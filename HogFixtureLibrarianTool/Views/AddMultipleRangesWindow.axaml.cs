@@ -31,10 +31,7 @@ public partial class AddMultipleRangesWindow : ReactiveWindow<AddMultipleRangesW
 
         NumberOfRangesToolTip.Text = inputState.Text.ToSingleLine();
 
-        if (inputState.IsValid)
-            NumberOfRangesInput.Classes.Set("Valid", true);
-        else
-            NumberOfRangesInput.Classes.Set("Error", true);
+        NumberOfRangesInput.Classes.Set(inputState.IsValid ? "Valid" : "Error", true);
     }
 
     private void UpdateDmxInputTextBox(IValidationState inputState)
@@ -43,10 +40,7 @@ public partial class AddMultipleRangesWindow : ReactiveWindow<AddMultipleRangesW
 
         EightBitDmxValueToolTip.Text = inputState.Text.ToSingleLine();
 
-        if (inputState.IsValid)
-            EightBitDmxValueInput.Classes.Set("Valid", true);
-        else
-            EightBitDmxValueInput.Classes.Set("Error", true);
+        EightBitDmxValueInput.Classes.Set(inputState.IsValid ? "Valid" : "Error", true);
     }
 
     private void UpdateDmxOffsetInputTextBox(IValidationState inputState)
@@ -55,10 +49,7 @@ public partial class AddMultipleRangesWindow : ReactiveWindow<AddMultipleRangesW
 
         DmxOffsetToolTip.Text = inputState.Text.ToSingleLine();
 
-        if (inputState.IsValid)
-            DmxOffsetInput.Classes.Set("Valid", true);
-        else
-            DmxOffsetInput.Classes.Set("Error", true);
+        DmxOffsetInput.Classes.Set(inputState.IsValid ? "Valid" : "Error", true);
     }
 
     private void UpdateFunctionComboBox(IValidationState inputState)
@@ -67,10 +58,7 @@ public partial class AddMultipleRangesWindow : ReactiveWindow<AddMultipleRangesW
 
         FunctionInputToolTip.Text = inputState.Text.ToSingleLine();
 
-        if (inputState.IsValid)
-            FunctionInput.Classes.Set("Valid", true);
-        else
-            FunctionInput.Classes.Set("Error", true);
+        FunctionInput.Classes.Set(inputState.IsValid ? "Valid" : "Error", true);
     }
 
     private void UpdateFeatureComboBox(IValidationState inputState)
@@ -79,9 +67,6 @@ public partial class AddMultipleRangesWindow : ReactiveWindow<AddMultipleRangesW
 
         FeatureInputToolTip.Text = inputState.Text.ToSingleLine();
 
-        if (inputState.IsValid)
-            FeatureInput.Classes.Set("Valid", true);
-        else
-            FeatureInput.Classes.Set("Error", true);
+        FeatureInput.Classes.Set(inputState.IsValid ? "Valid" : "Error", true);
     }
 }

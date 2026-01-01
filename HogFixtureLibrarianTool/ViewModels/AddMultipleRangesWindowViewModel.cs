@@ -257,15 +257,15 @@ public class AddMultipleRangesWindowViewModel : ValidatableViewModelBase
                     if (IncludeEndValue)
                         range = new HogRange(dmxStart,
                             dmxEnd: endingDmxValue,
-                            function: SelectedFunction,
-                            feature: SelectedFeature,
+                            functionName: SelectedFunction,
+                            featureName: SelectedFeature,
                             start: dmxStart,
                             end: endingDmxValue);
                     else
                         range = new HogRange(dmxStart,
                             dmxEnd: null,
-                            function: SelectedFunction,
-                            feature: SelectedFeature,
+                            functionName: SelectedFunction,
+                            featureName: SelectedFeature,
                             start: dmxStart,
                             end: null);
 
@@ -278,7 +278,7 @@ public class AddMultipleRangesWindowViewModel : ValidatableViewModelBase
                     HogRange? range = null;
                     // Holy shit this is a doozy! 
                     // I had to do this to prevent the app from calculating 
-                    // a bad 16-Bit DMX End Value. . . silently fix the issue :P
+                    // a bad 8-Bit DMX End Value. . . silently fix the issue :P
                     // -DTL
                     var endingDmxValue =
                         dmxStart + dmxOffset > HogDmxValidator.Max8BitValue
@@ -288,15 +288,15 @@ public class AddMultipleRangesWindowViewModel : ValidatableViewModelBase
                     if (IncludeEndValue)
                         range = new HogRange(dmxStart,
                             dmxEnd: endingDmxValue,
-                            function: SelectedFunction,
-                            feature: SelectedFeature,
+                            functionName: SelectedFunction,
+                            featureName: SelectedFeature,
                             start: dmxStart,
                             end: endingDmxValue);
                     else
                         range = new HogRange(dmxStart,
                             dmxEnd: null,
-                            function: SelectedFunction,
-                            feature: SelectedFeature,
+                            functionName: SelectedFunction,
+                            featureName: SelectedFeature,
                             start: dmxStart,
                             end: null);
 
@@ -353,9 +353,13 @@ public class AddMultipleRangesWindowViewModel : ValidatableViewModelBase
         var validDmxStart = 0;
 
         if (_is16Bit)
-            validDmxStart = _16BitOffset - numberOfRanges * dmxOffset;
+            // Tricky! Because this is the 16-bit range we need to cover, we must multiply by 256
+            // to catch all invalid values that could be converted.
+            //
+            // -DTL
+            validDmxStart = _16BitOffset - ((numberOfRanges * (dmxOffset + 1)) * _8BitOffset);
         else
-            validDmxStart = _8BitOffset - numberOfRanges * dmxOffset;
+            validDmxStart = _8BitOffset - numberOfRanges * (dmxOffset + 1);
 
         if (validDmxStart < 0)
             return new ValidationState(false, "Enter a valid number of ranges first");

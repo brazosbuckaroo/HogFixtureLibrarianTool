@@ -438,8 +438,8 @@ public class DmxValueConverterViewModel : RoutableViewModelBase
     {
         var newValue = Convert16BitValueTo8BitValue(new HogRange(Range16BitDmxStartInput,
             DmxEnd: Range16BitDmxEndInput,
-            Function: Range16BitFunctionInput,
-            Feature: Range16BitFeatureInput,
+            FunctionName: Range16BitFunctionInput,
+            FeatureName: Range16BitFeatureInput,
             Start: null,
             End: null));
 
@@ -475,8 +475,8 @@ public class DmxValueConverterViewModel : RoutableViewModelBase
     {
         var newValue = Convert8BitValueTo16BitValue(new HogRange(Range8BitDmxStartInput,
             DmxEnd: Range8BitDmxEndInput,
-            Function: Range8BitFunctionInput,
-            Feature: Range8BitFeatureInput,
+            FunctionName: Range8BitFunctionInput,
+            FeatureName: Range8BitFeatureInput,
             Start: null,
             End: null));
 
@@ -546,12 +546,12 @@ public class DmxValueConverterViewModel : RoutableViewModelBase
             }
         }
 
-        var range = new HogRange(dmxStart: sixteenBitStartingValue,
+        var range = new HogRange(sixteenBitStartingValue,
             dmxMidOne: (int)midOne,
             dmxMidTwo: (int)midTwo,
             dmxEnd: string.IsNullOrEmpty(eightBitRange.DmxEnd) ? null : sixteenBitEndingValue,
-            function: eightBitRange.Function,
-            feature: eightBitRange.Feature,
+            functionName: eightBitRange.FunctionName,
+            featureName: eightBitRange.FeatureName,
             start: eightBitRange.Start,
             end: eightBitRange.End);
 
@@ -580,22 +580,16 @@ public class DmxValueConverterViewModel : RoutableViewModelBase
             sixteenBitEndingValue = sixteenBitEndingValue / 256;
             sixteenBitStartingValue = sixteenBitEndingValue;
         }
-        // a check to see if the dmx values are flipped :o
-        else if (sixteenBitEndingValue < sixteenBitStartingValue)
-        {
-            sixteenBitEndingValue = sixteenBitEndingValue / 256;
-            sixteenBitStartingValue = (sixteenBitStartingValue + 1) / 256 - 1;
-        }
         else
         {
             sixteenBitStartingValue = sixteenBitStartingValue / 256;
-            sixteenBitEndingValue = (sixteenBitEndingValue + 1) / 256 - 1;
+            sixteenBitEndingValue = sixteenBitEndingValue / 256;
         }
 
         var range = new HogRange(sixteenBitStartingValue,
             dmxEnd: string.IsNullOrEmpty(sixteenBitRange.DmxEnd) ? null : sixteenBitEndingValue,
-            function: sixteenBitRange.Function,
-            feature: sixteenBitRange.Feature,
+            functionName: sixteenBitRange.FunctionName,
+            featureName: sixteenBitRange.FeatureName,
             start: sixteenBitRange.Start,
             end: sixteenBitRange.End);
 
@@ -628,7 +622,7 @@ public class DmxValueConverterViewModel : RoutableViewModelBase
 
     private IValidationState IsValidInputFeature(string? featureInput)
     {
-        if (!_dmxValidator.IsValidFunction(featureInput).Result.IsValid)
+        if (!_dmxValidator.IsValidFeature(featureInput).Result.IsValid)
             return new ValidationState(false, "No feature selected.");
 
         return new ValidationState(true, "Valid");

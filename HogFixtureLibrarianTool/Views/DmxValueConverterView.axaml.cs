@@ -33,10 +33,7 @@ public partial class DmxValueConverterView : ReactiveUserControl<DmxValueConvert
 
         DmxStartInputToolTip.Text = isValidEightBitDmxValue.Text.ToSingleLine();
 
-        if (isValidEightBitDmxValue.IsValid)
-            DmxStartInput.Classes.Set("Valid", true);
-        else
-            DmxStartInput.Classes.Set("Error", true);
+        DmxStartInput.Classes.Set(isValidEightBitDmxValue.IsValid ? "Valid" : "Error", true);
     }
 
     private void Update16BitStartingValueTextBox(IValidationState isValidSixteenBitDmxValue)
@@ -45,10 +42,7 @@ public partial class DmxValueConverterView : ReactiveUserControl<DmxValueConvert
 
         SixteenBitDmxStartInputToolTip.Text = isValidSixteenBitDmxValue.Text.ToSingleLine();
 
-        if (isValidSixteenBitDmxValue.IsValid)
-            SixteenBitDmxStartInput.Classes.Set("Valid", true);
-        else
-            SixteenBitDmxStartInput.Classes.Set("Error", true);
+        SixteenBitDmxStartInput.Classes.Set(isValidSixteenBitDmxValue.IsValid ? "Valid" : "Error", true);
     }
 
     private void Update8BitEndingValueTextBox(IValidationState isValidEightBitDmxValue)
@@ -57,10 +51,7 @@ public partial class DmxValueConverterView : ReactiveUserControl<DmxValueConvert
 
         DmxEndInputToolTip.Text = isValidEightBitDmxValue.Text.ToSingleLine();
 
-        if (isValidEightBitDmxValue.IsValid)
-            DmxEndInput.Classes.Set("Valid", true);
-        else
-            DmxEndInput.Classes.Set("Error", true);
+        DmxEndInput.Classes.Set(isValidEightBitDmxValue.IsValid ? "Valid" : "Error", true);
     }
 
     private void Update16BitEndingValueTextBox(IValidationState isValidSixteenBitDmxValue)
@@ -69,10 +60,7 @@ public partial class DmxValueConverterView : ReactiveUserControl<DmxValueConvert
 
         SixteenBitDmxEndInputToolTip.Text = isValidSixteenBitDmxValue.Text.ToSingleLine();
 
-        if (isValidSixteenBitDmxValue.IsValid)
-            SixteenBitDmxEndInput.Classes.Set("Valid", true);
-        else
-            SixteenBitDmxEndInput.Classes.Set("Error", true);
+        SixteenBitDmxEndInput.Classes.Set(isValidSixteenBitDmxValue.IsValid ? "Valid" : "Error", true);
     }
 
     private void Update8BitFunctionComboBox(IValidationState isValidFunction)
@@ -81,10 +69,7 @@ public partial class DmxValueConverterView : ReactiveUserControl<DmxValueConvert
 
         FunctionInputToolTip.Text = isValidFunction.Text.ToSingleLine();
 
-        if (isValidFunction.IsValid)
-            FunctionInput.Classes.Set("Valid", true);
-        else
-            FunctionInput.Classes.Set("Warning", true);
+        FunctionInput.Classes.Set(isValidFunction.IsValid ? "Valid" : "Warning", true);
     }
 
     private void Update16BitFunctionComboBox(IValidationState isValidFunction)
@@ -93,10 +78,7 @@ public partial class DmxValueConverterView : ReactiveUserControl<DmxValueConvert
 
         SixteenBitFunctionInputToolTip.Text = isValidFunction.Text.ToSingleLine();
 
-        if (isValidFunction.IsValid)
-            SixteenBitFunctionInput.Classes.Set("Valid", true);
-        else
-            SixteenBitFunctionInput.Classes.Set("Warning", true);
+        SixteenBitFunctionInput.Classes.Set(isValidFunction.IsValid ? "Valid" : "Warning", true);
     }
 
     private void Update8BitFeatureComboBox(IValidationState isValidFeature)
@@ -105,10 +87,7 @@ public partial class DmxValueConverterView : ReactiveUserControl<DmxValueConvert
 
         FeatureInputToolTip.Text = isValidFeature.Text.ToSingleLine();
 
-        if (isValidFeature.IsValid)
-            FeatureInput.Classes.Set("Valid", true);
-        else
-            FeatureInput.Classes.Set("Warning", true);
+        FeatureInput.Classes.Set(isValidFeature.IsValid ? "Valid" : "Warning", true);
     }
 
     private void Update16BitFeatureComboBox(IValidationState isValidFeature)
@@ -116,10 +95,7 @@ public partial class DmxValueConverterView : ReactiveUserControl<DmxValueConvert
         SixteenBitFeatureInput.Classes.Clear();
 
         SixteenBitFeatureInputToolTip.Text = isValidFeature.Text.ToSingleLine();
-
-        if (isValidFeature.IsValid)
-            SixteenBitFeatureInput.Classes.Set("Valid", true);
-        else
-            SixteenBitFeatureInput.Classes.Set("Warning", true);
+        
+        SixteenBitFeatureInput.Classes.Set(isValidFeature.IsValid ? "Valid" : "Warning", true);
     }
 }

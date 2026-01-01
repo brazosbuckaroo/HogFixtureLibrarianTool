@@ -23,9 +23,6 @@ public partial class AddMultipleFixtureModesWindow : ReactiveWindow<AddMultipleF
 
         NumberOfFixtureModesInputToolTip.Text = inputState.Text.ToSingleLine();
 
-        if (inputState.IsValid)
-            NumberOfFixtureModesInput.Classes.Set("Valid", true);
-        else
-            NumberOfFixtureModesInput.Classes.Set("Error", true);
+        NumberOfFixtureModesInputToolTip.Classes.Set(inputState.IsValid ? "Valid" : "Error", true);
     }
 }

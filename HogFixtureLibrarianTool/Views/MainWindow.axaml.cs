@@ -31,8 +31,10 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
     private async Task DoShowAddMultipleRanges(
         IInteractionContext<AddMultipleRangesWindowViewModel, HogRange[]?> context)
     {
-        var dialog = new AddMultipleRangesWindow();
-        dialog.DataContext = context.Input;
+        var dialog = new AddMultipleRangesWindow
+        {
+            DataContext = context.Input
+        };
 
         context.SetOutput(await dialog.ShowDialog<HogRange[]?>(this));
     }
@@ -40,16 +42,21 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
     private async Task DoShowAddMultupleFixtureModes(
         IInteractionContext<AddMultipleFixtureModesWindowViewModel, FixtureMode[]?> context)
     {
-        var dialog = new AddMultipleFixtureModesWindow();
-        dialog.DataContext = context.Input;
+        var dialog = new AddMultipleFixtureModesWindow
+        {
+            DataContext = context.Input
+            
+        };
 
         context.SetOutput(await dialog.ShowDialog<FixtureMode[]?>(this));
     }
 
     private async Task DoShowPreferences(IInteractionContext<ApplicationPreferencesWindowViewModel, Settings?> context)
     {
-        var newDialog = new ApplicationPreferencesWindow();
-        newDialog.DataContext = context.Input;
+        var newDialog = new ApplicationPreferencesWindow 
+        {
+            DataContext = context.Input
+        };
 
         if (!OwnedWindows.ToList().Exists(ownedDialog => ownedDialog.GetType() == newDialog.GetType()))
             context.SetOutput(await newDialog.ShowDialog<Settings?>(this));
@@ -59,8 +66,10 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
 
     private async Task DoShowAbout(IInteractionContext<AboutWindowViewModel, Unit> context)
     {
-        var newDialog = new AboutWindow();
-        newDialog.DataContext = context.Input;
+        var newDialog = new AboutWindow
+        {
+            DataContext = context.Input
+        };
 
         context.SetOutput(await newDialog.ShowDialog<Unit>(this));
     }
