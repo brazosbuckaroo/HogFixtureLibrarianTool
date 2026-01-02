@@ -6,9 +6,9 @@
         <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
         <Company>dtlighting</Company>
         <Product>Hog Fixture Librarian Tool</Product>
-        <AssemblyVersion>1.1.0.0</AssemblyVersion>
+        <AssemblyVersion>1.1.1.0</AssemblyVersion>
         <Authors>dtl</Authors>
-        <FileVersion>1.1.0.0</FileVersion>
+        <FileVersion>1.1.1.0</FileVersion>
         <IsPackable>false</IsPackable>
         <PackageId>HogFixtureLibrarianTool</PackageId>
         <Version>1.0.0.0</Version>
