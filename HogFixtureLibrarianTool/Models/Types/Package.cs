@@ -3,7 +3,7 @@
 [Serializable]
 public record Package(string? Name, List<FunctionPreview> Previews) : IHogData, INoNamespaceData
 {
-    public Package() : this(string.Empty, new List<FunctionPreview>())
+    public Package() : this(string.Empty, [])
     {
     }
 

@@ -1,9 +1,9 @@
 ﻿namespace HogFixtureLibrarianTool.Models.Types;
 
 [Serializable]
-public record Entry(string? Value, string? Name, Range Range) : IHogData, INoNamespaceData
+public record Entry(string? Value, string? Name, HogRange Range) : IHogData, INoNamespaceData
 {
-    public Entry() : this(string.Empty, string.Empty, new Range())
+    public Entry() : this(string.Empty, string.Empty, new HogRange())
     {
     }
 
@@ -11,5 +11,5 @@ public record Entry(string? Value, string? Name, Range Range) : IHogData, INoNam
 
     [XmlAttribute("name")] public string? Name { get; set; } = Name;
 
-    [XmlIgnore] public Range Range { get; } = Range;
+    [XmlIgnore] public HogRange Range { get; } = Range;
 }

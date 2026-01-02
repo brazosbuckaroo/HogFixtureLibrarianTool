@@ -17,8 +17,8 @@ public class GuidGeneratorViewModel : RoutableViewModelBase
         _modeName = string.Empty;
         SelectedFixtureMode = default;
         _selectedFixtureMode = default;
-        FixtureModes = new ObservableCollection<FixtureMode>();
-        _fixtureModes = new ObservableCollection<FixtureMode>();
+        FixtureModes = [];
+        _fixtureModes = [];
         GenerateGuid = ReactiveCommand.Create(GenerateGuidCommand);
         DeleteSelectedOrLastFixtureMode = ReactiveCommand.Create(DeleteSelectedOrLastFixtureModeCommand);
         DeleteAllModes = ReactiveCommand.Create(DeleteAllFixtureModesCommand);
@@ -38,8 +38,8 @@ public class GuidGeneratorViewModel : RoutableViewModelBase
         _modeName = string.Empty;
         SelectedFixtureMode = default;
         _selectedFixtureMode = default;
-        FixtureModes = new ObservableCollection<FixtureMode>();
-        _fixtureModes = new ObservableCollection<FixtureMode>();
+        FixtureModes = [];
+        _fixtureModes = [];
         GenerateGuid = ReactiveCommand.Create(GenerateGuidCommand);
         DeleteSelectedOrLastFixtureMode = ReactiveCommand.Create(DeleteSelectedOrLastFixtureModeCommand);
         DeleteAllModes = ReactiveCommand.Create(DeleteAllFixtureModesCommand);
@@ -59,8 +59,8 @@ public class GuidGeneratorViewModel : RoutableViewModelBase
         _modeName = string.Empty;
         SelectedFixtureMode = default;
         _selectedFixtureMode = default;
-        FixtureModes = new ObservableCollection<FixtureMode>();
-        _fixtureModes = new ObservableCollection<FixtureMode>();
+        FixtureModes = [];
+        _fixtureModes = [];
         GenerateGuid = ReactiveCommand.Create(GenerateGuidCommand);
         DeleteSelectedOrLastFixtureMode = ReactiveCommand.Create(DeleteSelectedOrLastFixtureModeCommand);
         DeleteAllModes = ReactiveCommand.Create(DeleteAllFixtureModesCommand);

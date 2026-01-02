@@ -75,10 +75,10 @@ public class StringmapEditorViewModel : RoutableViewModelBase
         _functions = new ObservableCollection<string>(_sqliteManager.GetTableAsync("FUNCTIONS").Result);
         Features = new ObservableCollection<string>(_sqliteManager.GetTableAsync("FEATURES").Result);
         _features = new ObservableCollection<string>(_sqliteManager.GetTableAsync("FEATURES").Result);
-        Ranges = new ObservableCollection<HogRange>();
-        _ranges = new ObservableCollection<HogRange>();
-        Entries = new ObservableCollection<Entry>();
-        _entries = new ObservableCollection<Entry>();
+        Ranges = [];
+        _ranges = [];
+        Entries = [];
+        _entries = [];
         RangeDmxStartState = this.WhenValueChanged(thisViewModel => thisViewModel.RangeDmxStartInput)
             .Select(_dmxValidator.IsValid8BitDmxValue);
         RangeStartState = this.WhenValueChanged(thisViewModel => thisViewModel.RangeStartInput)
@@ -138,10 +138,10 @@ public class StringmapEditorViewModel : RoutableViewModelBase
         _functions = new ObservableCollection<string>(_sqliteManager.GetTableAsync("FUNCTIONS").Result);
         Features = new ObservableCollection<string>(_sqliteManager.GetTableAsync("FEATURES").Result);
         _features = new ObservableCollection<string>(_sqliteManager.GetTableAsync("FEATURES").Result);
-        Ranges = new ObservableCollection<HogRange>();
-        _ranges = new ObservableCollection<HogRange>();
-        Entries = new ObservableCollection<Entry>();
-        _entries = new ObservableCollection<Entry>();
+        Ranges = [];
+        _ranges = [];
+        Entries = [];
+        _entries = [];
         RangeDmxStartState = this.WhenValueChanged(thisViewModel => thisViewModel.RangeDmxStartInput)
             .Select(_dmxValidator.IsValid8BitDmxValue);
         RangeStartState = this.WhenValueChanged(thisViewModel => thisViewModel.RangeStartInput)
@@ -207,10 +207,10 @@ public class StringmapEditorViewModel : RoutableViewModelBase
         _functions = new ObservableCollection<string>(_sqliteManager.GetTableAsync("FUNCTIONS").Result);
         Features = new ObservableCollection<string>(_sqliteManager.GetTableAsync("FEATURES").Result);
         _features = new ObservableCollection<string>(_sqliteManager.GetTableAsync("FEATURES").Result);
-        Ranges = new ObservableCollection<HogRange>();
-        _ranges = new ObservableCollection<HogRange>();
-        Entries = new ObservableCollection<Entry>();
-        _entries = new ObservableCollection<Entry>();
+        Ranges = [];
+        _ranges = [];
+        Entries = [];
+        _entries = [];
         RangeDmxStartState = this.WhenValueChanged(thisViewModel => thisViewModel.RangeDmxStartInput)
             .Select(_dmxValidator.IsValid8BitDmxValue);
         RangeStartState = this.WhenValueChanged(thisViewModel => thisViewModel.RangeStartInput)

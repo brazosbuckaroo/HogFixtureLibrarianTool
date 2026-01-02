@@ -2,9 +2,9 @@
 
 public class AddMultipleRangesWindowViewModel : ValidatableViewModelBase
 {
-    private readonly int _16BitOffset = 65535;
+    private const int _16BitOffset = 65535;
 
-    private readonly int _8BitOffset = 256;
+    private const int _8BitOffset = 256;
 
     private readonly IDmxValidator _dmxValidator;
 

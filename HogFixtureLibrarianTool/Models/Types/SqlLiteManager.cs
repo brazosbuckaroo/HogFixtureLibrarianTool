@@ -4,13 +4,15 @@ public class SqlLiteManager : IDbManager
 {
     private readonly string _fileDirectory = Path.Combine(AppContext.BaseDirectory, "Databases");
 
-    private readonly string _fileName = "FixtureBuilderFunctions.sqlite";
+    private const string FileName = "FixtureBuilderFunctions.sqlite";
 
     public SqlLiteManager()
     {
-        ConnectionString = new SQLiteConnectionStringBuilder();
-        ConnectionString.DataSource = Path.Combine(_fileDirectory, _fileName);
-        ConnectionString.Version = 3;
+        ConnectionString = new SQLiteConnectionStringBuilder
+        {
+            DataSource = Path.Combine(_fileDirectory, FileName),
+            Version = 3
+        };
 
         if (!Directory.Exists(_fileDirectory)) Directory.CreateDirectory(_fileDirectory);
 
@@ -23,70 +25,61 @@ public class SqlLiteManager : IDbManager
     {
         var data = new List<string>();
 
-        await using (var connection = new SQLiteConnection(ConnectionString.ConnectionString))
-        {
-            await connection.OpenAsync(cancellation);
+        await using var connection = new SQLiteConnection(ConnectionString.ConnectionString);
+        await connection.OpenAsync(cancellation);
 
-            await using (var command = connection.CreateCommand())
-            {
-                command.CommandText = @"SELECT NAME FROM %tableName%"
-                    .Replace("%tableName%", tableName);
+        await using var command = connection.CreateCommand();
+        command.CommandText = @"SELECT NAME FROM %tableName%"
+            .Replace("%tableName%", tableName);
 
-                await command.PrepareAsync(cancellation);
+        await command.PrepareAsync(cancellation);
 
-                await using (var transaction = connection.BeginTransaction())
-                {
-                    command.Transaction = transaction;
-                    command.Connection = connection;
+        await using var transaction = connection.BeginTransaction();
+        command.Transaction = transaction;
+        command.Connection = connection;
 
-                    await using (var reader = command.ExecuteReader())
-                    {
-                        while (await reader.ReadAsync(cancellation))
-                            data.Add(await reader.GetFieldValueAsync<string>(0, cancellation));
-                    }
-                }
-            }
-        }
+        await using var reader = command.ExecuteReader();
+        
+        while (await reader.ReadAsync(cancellation))
+            data.Add(await reader.GetFieldValueAsync<string>(0, cancellation));
 
         return data;
     }
 
     private void CreateDbFile()
     {
-        var filePath = Path.Combine(_fileDirectory, _fileName);
+        var filePath = Path.Combine(_fileDirectory, FileName);
 
-        if (!File.Exists(filePath))
+        if (File.Exists(filePath)) return;
+        
+        SQLiteConnection.CreateFile(filePath);
+
+        // make tables
+        using var connection = new SQLiteConnection(ConnectionString.ConnectionString);
+        
+        connection.Open();
+
+        using (var command = connection.CreateCommand())
         {
-            SQLiteConnection.CreateFile(filePath);
-
-            // make tables
-            using (var connection = new SQLiteConnection(ConnectionString.ConnectionString))
+            using (var transaction = connection.BeginTransaction())
             {
-                connection.Open();
-
-                using (var command = connection.CreateCommand())
-                {
-                    using (var transaction = connection.BeginTransaction())
-                    {
-                        command.Transaction = transaction;
-                        command.Connection = connection;
-                        command.CommandText = @"CREATE TABLE IF NOT EXISTS FUNCTIONS(ID INTEGER PRIMARY KEY ASC, 
+                command.Transaction = transaction;
+                command.Connection = connection;
+                command.CommandText = @"CREATE TABLE IF NOT EXISTS FUNCTIONS(ID INTEGER PRIMARY KEY ASC, 
                                                                                      NAME TEXT)";
 
-                        command.Prepare();
-                        command.ExecuteNonQuery();
+                command.Prepare();
+                command.ExecuteNonQuery();
 
-                        command.CommandText = @"CREATE TABLE IF NOT EXISTS FEATURES(ID INTEGER PRIMARY KEY ASC,
+                command.CommandText = @"CREATE TABLE IF NOT EXISTS FEATURES(ID INTEGER PRIMARY KEY ASC,
                                                                                     NAME TEXT)";
 
-                        command.ExecuteNonQuery();
-                        transaction.Commit();
-                    }
-                }
-
-                CreateInitialTableData();
+                command.ExecuteNonQuery();
+                transaction.Commit();
             }
         }
+
+        CreateInitialTableData();
     }
 
     private void CreateInitialTableData()
@@ -168,33 +161,27 @@ public class SqlLiteManager : IDbManager
 
     private void InsertData(string tableName, List<string> data)
     {
-        using (var connection = new SQLiteConnection(ConnectionString.ConnectionString))
-        {
-            connection.Open();
+        using var connection = new SQLiteConnection(ConnectionString.ConnectionString);
+        connection.Open();
 
-            using (var command = connection.CreateCommand())
-            {
-                command.CommandText = @"INSERT INTO %tableName%(NAME)
+        using var command = connection.CreateCommand();
+        command.CommandText = @"INSERT INTO %tableName%(NAME)
                                         VALUES ($data)"
-                    .Replace("%tableName%", tableName);
+            .Replace("%tableName%", tableName);
 
-                using (var transaction = connection.BeginTransaction())
-                {
-                    command.Transaction = transaction;
-                    command.Connection = connection;
+        using var transaction = connection.BeginTransaction();
+        command.Transaction = transaction;
+        command.Connection = connection;
 
-                    foreach (var value in data)
-                    {
-                        command.Parameters.AddWithValue("$data", value);
+        foreach (var value in data)
+        {
+            command.Parameters.AddWithValue("$data", value);
 
-                        command.Prepare();
-                        command.ExecuteNonQuery();
-                        command.Parameters.Clear();
-                    }
-
-                    transaction.Commit();
-                }
-            }
+            command.Prepare();
+            command.ExecuteNonQuery();
+            command.Parameters.Clear();
         }
+
+        transaction.Commit();
     }
 }

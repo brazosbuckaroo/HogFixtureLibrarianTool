@@ -1,6 +1,4 @@
-﻿using Avalonia.Input.Platform;
-
-namespace HogFixtureLibrarianTool.Models.Types;
+﻿namespace HogFixtureLibrarianTool.Models.Types;
 
 public class ClipboardManager : IClipboardService
 {
@@ -8,14 +6,12 @@ public class ClipboardManager : IClipboardService
 
     public async Task SetClipboardTextAsync(string? textToCopy)
     {
-        if (_application == null ||
-            _application.ApplicationLifetime == null)
+        if (_application?.ApplicationLifetime == null)
             throw new ApplicationException("Application is null . . . abort!!!!!!!");
 
-        if (_application.ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime desktop ||
-            desktop.MainWindow is not
+        if (_application.ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime { MainWindow:
             {
-            } provider ||
+            } provider } ||
             provider.Clipboard is null)
             throw new NullReferenceException("Missing the clipboard reference");
 
@@ -24,14 +20,11 @@ public class ClipboardManager : IClipboardService
 
     public async Task GetClipboardTextAsync()
     {
-        if (_application == null ||
-            _application.ApplicationLifetime == null)
+        if (_application?.ApplicationLifetime == null)
             throw new ApplicationException("Application is null . . . abort!!!!!!!");
 
-        if (_application.ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime desktop ||
-            desktop.MainWindow is not
-            {
-            } provider ||
+        if (_application.ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime { MainWindow: {
+            } provider } ||
             provider.Clipboard is null)
             throw new NullReferenceException("Missing the clipboard reference");
 

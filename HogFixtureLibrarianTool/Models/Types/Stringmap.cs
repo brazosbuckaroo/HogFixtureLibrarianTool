@@ -5,7 +5,7 @@ public record Stringmap : IHogData, INoNamespaceData
 {
     public Stringmap()
     {
-        Previews = new List<FunctionPreview>();
+        Previews = [];
     }
 
     public Stringmap(List<FunctionPreview> previews)
@@ -15,9 +15,10 @@ public record Stringmap : IHogData, INoNamespaceData
 
     public Stringmap(FunctionPreview preview)
     {
-        Previews = new List<FunctionPreview>();
-
-        Previews.Add(preview);
+        Previews =
+        [
+            preview
+        ];
     }
 
     [XmlElement("Funcpreview")] public List<FunctionPreview> Previews { get; }

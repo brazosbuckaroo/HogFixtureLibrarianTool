@@ -38,7 +38,7 @@ public class ConversionManager : IConvertor
                 if (!int.TryParse(tempStr, out var temp))
                     throw new InvalidCastException("Could not combine the tens and ones digits to make a number.");
 
-                if (temp > 9 && temp < 20)
+                if (temp is > 9 and < 20)
                     output += ConvertSpecialCasesToString(temp);
                 else
                     for (var i = tensPlaceValue; i < numAsStr.Length; i++)

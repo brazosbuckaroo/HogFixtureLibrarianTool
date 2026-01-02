@@ -3,6 +3,7 @@
 public class XmlManager : IXmlReaderWriter
 {
     private readonly XmlSerializerNamespaces _emptyNamespace;
+
     private readonly XmlReaderSettings _settings;
 
     public XmlManager()
@@ -26,7 +27,7 @@ public class XmlManager : IXmlReaderWriter
         stream.Position = 0; // resetting to read XML
 
         using var reader = XmlReader.Create(stream, _settings);
-        
+
         while (await reader.ReadAsync()) xmlString = await reader.ReadOuterXmlAsync();
 
         return xmlString;

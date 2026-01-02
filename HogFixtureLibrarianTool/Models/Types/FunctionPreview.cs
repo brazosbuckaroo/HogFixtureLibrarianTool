@@ -3,7 +3,7 @@
 [Serializable]
 public record FunctionPreview(Definition Definition, List<Entry> Entries) : IHogData, INoNamespaceData
 {
-    public FunctionPreview() : this(new Definition(), new List<Entry>())
+    public FunctionPreview() : this(new Definition(), [])
     {
     }
 
