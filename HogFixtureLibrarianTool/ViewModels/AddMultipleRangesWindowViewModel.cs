@@ -5,6 +5,7 @@ public class AddMultipleRangesWindowViewModel : ValidatableViewModelBase
     private readonly int _16BitOffset = 65535;
 
     private readonly int _8BitOffset = 256;
+
     private readonly IDmxValidator _dmxValidator;
 
     private readonly bool _is16Bit;
@@ -360,7 +361,7 @@ public class AddMultipleRangesWindowViewModel : ValidatableViewModelBase
             validDmxStart = (_16BitOffset - ((numberOfRanges * (dmxOffset + 1)) * _8BitOffset)) + 2;
         else
             validDmxStart = (_8BitOffset - numberOfRanges * (dmxOffset + 1)) + 1;
-        
+
         if (validDmxStart < 0)
             return new ValidationState(false, "Enter a valid number of ranges first");
         if (dmxStart < 0 || dmxStart >= validDmxStart)
