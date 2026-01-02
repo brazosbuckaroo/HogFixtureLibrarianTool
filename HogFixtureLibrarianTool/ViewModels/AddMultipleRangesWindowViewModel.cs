@@ -207,7 +207,7 @@ public class AddMultipleRangesWindowViewModel : ValidatableViewModelBase
         var validNumberOfRanges = 0;
 
         if (_is16Bit)
-            validNumberOfRanges = _16BitOffset / ((dmxOffset + 1) * _8BitOffset) + 1; // say what?
+            validNumberOfRanges = _16BitOffset / (((dmxOffset + 1) * _8BitOffset)) + 1; // say what?
         else
             validNumberOfRanges = _8BitOffset / (dmxOffset + 1);
 
@@ -357,10 +357,10 @@ public class AddMultipleRangesWindowViewModel : ValidatableViewModelBase
             // to catch all invalid values that could be converted.
             //
             // -DTL
-            validDmxStart = _16BitOffset - ((numberOfRanges * (dmxOffset + 1)) * _8BitOffset);
+            validDmxStart = (_16BitOffset - ((numberOfRanges * (dmxOffset + 1)) * _8BitOffset)) + 2;
         else
-            validDmxStart = _8BitOffset - numberOfRanges * (dmxOffset + 1);
-
+            validDmxStart = (_8BitOffset - numberOfRanges * (dmxOffset + 1)) + 1;
+        
         if (validDmxStart < 0)
             return new ValidationState(false, "Enter a valid number of ranges first");
         if (dmxStart < 0 || dmxStart >= validDmxStart)
