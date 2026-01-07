@@ -10,6 +10,7 @@ global using System.Reactive.Disposables.Fluent;
 global using System.Reactive.Linq;
 global using System.Reflection;
 global using System.Text;
+global using System.Text.Json.Serialization;
 global using System.Threading;
 global using System.Threading.Tasks;
 global using System.Xml;

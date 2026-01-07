@@ -1,7 +1,7 @@
 namespace HogFixtureLibrarianTool.Models.Types;
 
 [Serializable]
-public record Escape( 
+public record Escape(
     string FunctionName,
     string FeatureName,
     string Start,

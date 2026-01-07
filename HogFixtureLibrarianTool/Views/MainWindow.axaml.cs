@@ -45,7 +45,6 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
         var dialog = new AddMultipleFixtureModesWindow
         {
             DataContext = context.Input
-            
         };
 
         context.SetOutput(await dialog.ShowDialog<FixtureMode[]?>(this));
@@ -53,7 +52,7 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
 
     private async Task DoShowPreferences(IInteractionContext<ApplicationPreferencesWindowViewModel, Settings?> context)
     {
-        var newDialog = new ApplicationPreferencesWindow 
+        var newDialog = new ApplicationPreferencesWindow
         {
             DataContext = context.Input
         };

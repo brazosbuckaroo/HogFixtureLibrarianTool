@@ -95,7 +95,7 @@ public partial class DmxValueConverterView : ReactiveUserControl<DmxValueConvert
         SixteenBitFeatureInput.Classes.Clear();
 
         SixteenBitFeatureInputToolTip.Text = isValidFeature.Text.ToSingleLine();
-        
+
         SixteenBitFeatureInput.Classes.Set(isValidFeature.IsValid ? "Valid" : "Warning", true);
     }
 }

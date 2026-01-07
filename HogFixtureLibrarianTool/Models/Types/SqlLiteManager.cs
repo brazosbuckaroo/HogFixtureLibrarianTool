@@ -39,7 +39,7 @@ public class SqlLiteManager : IDbManager
         command.Connection = connection;
 
         await using var reader = command.ExecuteReader();
-        
+
         while (await reader.ReadAsync(cancellation))
             data.Add(await reader.GetFieldValueAsync<string>(0, cancellation));
 
@@ -51,12 +51,12 @@ public class SqlLiteManager : IDbManager
         var filePath = Path.Combine(_fileDirectory, FileName);
 
         if (File.Exists(filePath)) return;
-        
+
         SQLiteConnection.CreateFile(filePath);
 
         // make tables
         using var connection = new SQLiteConnection(ConnectionString.ConnectionString);
-        
+
         connection.Open();
 
         using (var command = connection.CreateCommand())
