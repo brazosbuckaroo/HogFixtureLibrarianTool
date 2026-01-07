@@ -8,8 +8,8 @@ public record Function(
     string SubName,
     string Group,
     string GroupBuddy,
-    LinkedList<Feature> Features,
-    LinkedList<Function>? Mutexes) : IHogData, INoNamespaceData
+    List<Feature> Features,
+    List<Function>? Mutexes) : IHogData, INoNamespaceData
 {
     [XmlAttribute(AttributeName = "kind")] public string Kind { get; set; } = Kind;
 
@@ -27,7 +27,7 @@ public record Function(
     [XmlAttribute(AttributeName = "groupbuddy")]
     public string GroupBuddy { get; set; } = GroupBuddy;
 
-    [XmlArray] public LinkedList<Feature> Features { get; set; } = Features;
+    [XmlArray] public List<Feature> Features { get; set; } = Features;
 
-    [XmlArray(ElementName = "Mutex")] public LinkedList<Function>? Mutexes { get; set; } = Mutexes;
+    [XmlArray(ElementName = "Mutex")] public List<Function>? Mutexes { get; set; } = Mutexes;
 }

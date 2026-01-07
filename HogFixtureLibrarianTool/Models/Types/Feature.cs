@@ -39,4 +39,9 @@ public record Feature(
 
     [XmlAttribute(AttributeName = "description")]
     public string? Description { get; set; } = Description;
+
+    public bool ShouldSerializeUnit()
+    {
+        return Unit is not null;
+    }
 }

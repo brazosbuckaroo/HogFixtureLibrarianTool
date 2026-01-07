@@ -256,14 +256,16 @@ public class AddMultipleRangesWindowViewModel : ValidatableViewModelBase
                         : dmxStart + (dmxOffset + 1) * _8BitOffset;
 
                     if (IncludeEndValue)
-                        range = new HogRange(dmxStart,
+                        range = new HogRange(
+                            dmxStart: dmxStart,
                             dmxEnd: endingDmxValue,
                             functionName: SelectedFunction,
                             featureName: SelectedFeature,
                             start: dmxStart,
                             end: endingDmxValue);
                     else
-                        range = new HogRange(dmxStart,
+                        range = new HogRange(
+                            dmxStart: dmxStart,
                             dmxEnd: null,
                             functionName: SelectedFunction,
                             featureName: SelectedFeature,
@@ -287,14 +289,16 @@ public class AddMultipleRangesWindowViewModel : ValidatableViewModelBase
                             : dmxStart + dmxOffset; // "what an idiot" - HG
 
                     if (IncludeEndValue)
-                        range = new HogRange(dmxStart,
+                        range = new HogRange(
+                            dmxStart: dmxStart,
                             dmxEnd: endingDmxValue,
                             functionName: SelectedFunction,
                             featureName: SelectedFeature,
                             start: dmxStart,
                             end: endingDmxValue);
                     else
-                        range = new HogRange(dmxStart,
+                        range = new HogRange( 
+                            dmxStart: dmxStart,
                             dmxEnd: null,
                             functionName: SelectedFunction,
                             featureName: SelectedFeature,

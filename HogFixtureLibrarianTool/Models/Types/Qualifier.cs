@@ -8,6 +8,11 @@ public record Qualifier(
     Function? Function = null,
     Feature? Feature = null) : IHogData, INoNamespaceData
 {
+    public Qualifier() : this(string.Empty, string.Empty, string.Empty)
+    {
+        
+    }
+    
     [XmlIgnore]
     public Function? Function
     {
@@ -38,4 +43,14 @@ public record Qualifier(
 
     [XmlAttribute(AttributeName = "start")]
     public string Start { get; set; } = Start;
+
+    public bool ShouldSerializeFunction()
+    {
+        return Function is not null;
+    }
+    
+    public bool ShouldSerializeFeature()
+    {
+        return Feature is not null;
+    }
 }

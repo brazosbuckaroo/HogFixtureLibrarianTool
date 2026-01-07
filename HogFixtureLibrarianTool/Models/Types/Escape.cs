@@ -1,3 +1,5 @@
+using System.Runtime.CompilerServices;
+
 namespace HogFixtureLibrarianTool.Models.Types;
 
 [Serializable]
@@ -8,6 +10,10 @@ public record Escape(
     Function? Function = null,
     Feature? Feature = null) : INoNamespaceData, IHogData
 {
+    public Escape() : this(string.Empty, string.Empty, string.Empty, null, null)
+    {
+    }
+
     [XmlIgnore]
     public Function? Function
     {
@@ -38,4 +44,14 @@ public record Escape(
 
     [XmlAttribute(AttributeName = "start")]
     public string Start { get; set; } = Start;
+
+    public bool ShouldSerializeFunction()
+    {
+        return Function is not null;
+    }
+
+    public bool ShouldSerializeFeature()
+    {
+        return Feature is not null;
+    }
 }

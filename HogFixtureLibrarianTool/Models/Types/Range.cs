@@ -10,8 +10,8 @@ public record Range(
     string? End = null,
     string? DmxMidOne = null,
     string? DmxMidTwo = null,
+    List<Escape>? Escapes = null,
     Qualifiers? Qualifiers = null,
-    LinkedList<Escape>? Escapes = null,
     Function? Function = null,
     Feature? Feature = null)
     : IHogData, INoNamespaceData
@@ -20,7 +20,8 @@ public record Range(
     {
     }
 
-    public Range(int? dmxStart,
+    public Range(
+        int? dmxStart,
         string? functionName,
         string? featureName,
         int? dmxEnd = null,
@@ -28,8 +29,8 @@ public record Range(
         string? end = null,
         int? dmxMidOne = null,
         int? dmxMidTwo = null,
+        List<Escape>? escapes = null,
         Qualifiers? qualifiers = null,
-        LinkedList<Escape>? Escapes = null,
         Function? function = null,
         Feature? feature = null) : this(dmxStart.ToString(), functionName, featureName, start,
         dmxEnd == null ? null : dmxEnd.ToString(), end, dmxMidOne == null ? null : dmxMidOne.ToString(),
@@ -37,7 +38,8 @@ public record Range(
     {
     }
 
-    public Range(int? dmxStart,
+    public Range(
+        int? dmxStart,
         string? functionName,
         string? featureName,
         int? dmxEnd = null,
@@ -45,8 +47,8 @@ public record Range(
         int? end = null,
         int? dmxMidOne = null,
         int? dmxMidTwo = null,
+        List<Escape>? escapes = null,
         Qualifiers? qualifiers = null,
-        LinkedList<Escape>? Escapes = null,
         Function? function = null,
         Feature? feature = null) : this(dmxStart.ToString(), functionName, featureName,
         start == null ? null : start.ToString(),
@@ -98,7 +100,17 @@ public record Range(
 
     [XmlAttribute(AttributeName = "end")] public string? End { get; set; } = End;
 
-    [XmlArray] public LinkedList<Escape>? Escapes { get; set; } = Escapes;
+    [XmlArray] public List<Escape>? Escapes { get; set; } = Escapes;
 
-    [XmlAnyElement] public Qualifiers? Qualifiers { get; set; } = Qualifiers;
+    [XmlElement] public Qualifiers? Qualifiers { get; set; } = Qualifiers;
+
+    public bool ShouldSerializeEscapes()
+    {
+        return Escapes is not null;
+    }
+
+    public bool ShouldSerializeQualifiers()
+    {
+        return Qualifiers is not null;
+    }
 }

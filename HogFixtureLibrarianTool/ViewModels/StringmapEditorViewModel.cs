@@ -352,7 +352,8 @@ public class StringmapEditorViewModel : RoutableViewModelBase
         if (!_dmxValidator.IsValid8BitDmxValue(RangeStartInput).IsValid)
             throw new ArgumentException("Range Start is not a valid DMX value");
 
-        var newRange = new HogRange(RangeDmxStartInput,
+        var newRange = new HogRange(
+            RangeDmxStartInput,
             RangeFunctionInput,
             RangeFeatureInput,
             RangeStartInput);
