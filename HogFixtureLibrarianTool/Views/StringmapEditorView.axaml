@@ -180,10 +180,10 @@
                                             Binding="{Binding DmxStart}" />
                         <DataGridTextColumn Header="Function"
                                             Width="*"
-                                            Binding="{Binding Function}" />
+                                            Binding="{Binding FunctionName}" />
                         <DataGridTextColumn Header="Feature"
                                             Width="*"
-                                            Binding="{Binding Feature}" />
+                                            Binding="{Binding FeatureName}" />
                         <DataGridTextColumn Header="Start"
                                             Width="*"
                                             Binding="{Binding Start}" />
@@ -254,10 +254,10 @@
                                             Binding="{Binding Name}" />
                         <DataGridTextColumn Header="Function"
                                             Width="*"
-                                            Binding="{Binding Range.Function}" />
+                                            Binding="{Binding Range.FunctionName}" />
                         <DataGridTextColumn Header="Feature"
                                             Width="*"
-                                            Binding="{Binding Range.Feature}" />
+                                            Binding="{Binding Range.FeatureName}" />
                         <DataGridTemplateColumn Header="Delete">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate DataType="types:Entry">

@@ -34,7 +34,7 @@ public partial class StringmapEditorView : ReactiveUserControl<StringmapEditorVi
 
         RangeFunctionToolTip.Text = rangeFunctionState.Text.ToSingleLine();
 
-        RangeFeatureInput.Classes.Set(rangeFunctionState.IsValid ? "Valid" : "Error", true);
+        RangeFunctionInput.Classes.Set(rangeFunctionState.IsValid ? "Valid" : "Error", true);
     }
 
     private void UpdateRangeFeature(IValidationState rangeFeatureState)
@@ -52,6 +52,6 @@ public partial class StringmapEditorView : ReactiveUserControl<StringmapEditorVi
 
         StartToolTip.Text = rangeStartState.Text.ToSingleLine();
 
-        StartToolTip.Classes.Set(rangeStartState.IsValid ? "Valid" : "Error", true);
+        StartInput.Classes.Set(rangeStartState.IsValid ? "Valid" : "Error", true);
     }
 }
