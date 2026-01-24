@@ -210,7 +210,7 @@ public class AddMultipleRangesWindowViewModel : ValidatableViewModelBase
         if (_is16Bit)
             validNumberOfRanges = _16BitOffset / ((dmxOffset + 1) * _8BitOffset) + 1; // say what?
         else
-            validNumberOfRanges = _8BitOffset / (dmxOffset + 1);
+            validNumberOfRanges = (_8BitOffset / (dmxOffset + 1)) + 1;
 
         if (!int.TryParse(input, out var number))
             return new ValidationState(false, $"Must enter a number between 0 and {validNumberOfRanges + 1}");
@@ -358,17 +358,14 @@ public class AddMultipleRangesWindowViewModel : ValidatableViewModelBase
         var validDmxStart = 0;
 
         if (_is16Bit)
-            // Tricky! Because this is the 16-bit range we need to cover, we must multiply by 256
-            // to catch all invalid values that could be converted.
-            //
-            // -DTL
-            validDmxStart = _16BitOffset - numberOfRanges * (dmxOffset + 1) * _8BitOffset + 2;
+            validDmxStart = _16BitOffset - numberOfRanges * (dmxOffset + 1) + 2;
         else
-            validDmxStart = _8BitOffset - numberOfRanges * (dmxOffset + 1) + 1;
-
+            validDmxStart = _8BitOffset - numberOfRanges * (dmxOffset + 1) + 2;
+        
+        
         if (validDmxStart < 0)
-            return new ValidationState(false, "Enter a valid number of ranges first");
-        if (dmxStart < 0 || dmxStart >= validDmxStart)
+            return new ValidationState(false, "Enter a DMX Start greater than or equal to 0");
+        if (dmxStart < 0 || dmxStart > validDmxStart)
             return new ValidationState(false, $"Must enter a number between 0 and {validDmxStart}");
 
         return new ValidationState(true, "Valid");
