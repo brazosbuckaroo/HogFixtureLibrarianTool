@@ -213,17 +213,16 @@ public class AddMultipleRangesWindowViewModel : ValidatableViewModelBase
             validNumberOfRanges = (_16BitOffset - dmxStart) / ((dmxOffset + 1) * _8BitOffset) + 1; // say what?
         else
             validNumberOfRanges = (_8BitOffset - dmxStart) / (dmxOffset + 1) + 1;
-            
 
+        if (validNumberOfRanges <= 0)
+            return new ValidationState(false, "Check DMX Start");
         if (!int.TryParse(input, out var number))
             return new ValidationState(false, $"Must enter a number between 0 and {validNumberOfRanges + 1}");
-
         if (number <= 0) return new ValidationState(false, "Enter a number greater than 0");
 
-        if (number > validNumberOfRanges)
-            return new ValidationState(false, $"Enter a number less than {validNumberOfRanges + 1}");
-
-        return new ValidationState(true, "Valid");
+        return number > validNumberOfRanges
+            ? new ValidationState(false, $"Enter a number less than {validNumberOfRanges + 1}")
+            : new ValidationState(true, "Valid");
     }
 
     private HogRange[]? CancelMultipleAddsCommand()
@@ -368,7 +367,7 @@ public class AddMultipleRangesWindowViewModel : ValidatableViewModelBase
             validDmxStart = _16BitOffset - numberOfRanges * dmxOffset + 2;
         else
             validDmxStart = _8BitOffset - numberOfRanges * dmxOffset + 2;
-        
+
         if (validDmxStart == 0 && dmxStart == 0)
             return new ValidationState(true, "Valid");
         if (dmxStart < 0 && dmxStart >= validDmxStart)
