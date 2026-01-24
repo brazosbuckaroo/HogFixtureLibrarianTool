@@ -273,7 +273,9 @@ public class AddMultipleRangesWindowViewModel : ValidatableViewModelBase
                             end: null);
 
                     ranges[rangeNumber] = range;
-                    dmxStart = endingDmxValue + 1;
+                    dmxStart = endingDmxValue + 1 > HogDmxValidator.Max16BitValue 
+                        ? HogDmxValidator.Max16BitValue 
+                        : endingDmxValue + 1;
                 }
             else
                 for (var rangeNumber = 0; rangeNumber < numberOfRanges; rangeNumber++)

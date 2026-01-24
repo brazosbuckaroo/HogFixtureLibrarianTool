@@ -564,8 +564,8 @@ public class DmxValueConverterViewModel : RoutableViewModelBase
     private HogRange Convert16BitValueTo8BitValue(HogRange sixteenBitRange)
     {
         if (!_dmxValidator.TryConvertDmxStringToIntegers(sixteenBitRange,
-                out _,
-                out _,
+                out var _,
+                out var _,
                 true))
             throw new ArgumentException("Invalid 16-Bit DMX Value.");
 
