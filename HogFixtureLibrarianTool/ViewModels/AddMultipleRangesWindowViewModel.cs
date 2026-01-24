@@ -210,7 +210,7 @@ public class AddMultipleRangesWindowViewModel : ValidatableViewModelBase
         var validNumberOfRanges = 0;
 
         if (_is16Bit)
-            validNumberOfRanges = _16BitOffset / ((dmxOffset + 1) * _8BitOffset) + 1; // say what?
+            validNumberOfRanges = (_16BitOffset - dmxStart) / ((dmxOffset + 1) * _8BitOffset) + 1; // say what?
         else
             validNumberOfRanges = (_8BitOffset - dmxStart) / (dmxOffset + 1) + 1;
             
