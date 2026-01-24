@@ -50,8 +50,8 @@ public class AddMultipleRangesWindowViewModel : ValidatableViewModelBase
         Features = new ObservableCollection<string>(_sqliteManager.GetTableAsync("FEATURES").Result);
         _features = new ObservableCollection<string>(_sqliteManager.GetTableAsync("FEATURES").Result);
         NumberOfRangesState = this.WhenAnyValue(thisViewModel => thisViewModel.NumberOfRanges,
-                thisViewModel => thisViewModel.DmxOffset)
-            .Select(properties => IsValidNumberOfRanges(properties.Item1, properties.Item2));
+                thisViewModel => thisViewModel.DmxOffset, thisViewModel => thisViewModel.DmxStartValue)
+            .Select(properties => IsValidNumberOfRanges(properties.Item1, properties.Item2, properties.Item3));
         DmxStartValueState = this.WhenAnyValue(thisViewModel => thisViewModel.DmxStartValue,
                 thisViewModel => thisViewModel.NumberOfRanges,
                 thisViewModel => thisViewModel.DmxOffset)
@@ -101,8 +101,8 @@ public class AddMultipleRangesWindowViewModel : ValidatableViewModelBase
         Features = new ObservableCollection<string>(_sqliteManager.GetTableAsync("FEATURES").Result);
         _features = new ObservableCollection<string>(_sqliteManager.GetTableAsync("FEATURES").Result);
         NumberOfRangesState = this.WhenAnyValue(thisViewModel => thisViewModel.NumberOfRanges,
-                thisViewModel => thisViewModel.DmxOffset)
-            .Select(properties => IsValidNumberOfRanges(properties.Item1, properties.Item2));
+                thisViewModel => thisViewModel.DmxOffset, thisViewModel => thisViewModel.DmxStartValue)
+            .Select(properties => IsValidNumberOfRanges(properties.Item1, properties.Item2, properties.Item3));
         DmxStartValueState = this.WhenAnyValue(thisViewModel => thisViewModel.DmxStartValue,
                 thisViewModel => thisViewModel.NumberOfRanges,
                 thisViewModel => thisViewModel.DmxOffset)
@@ -200,17 +200,20 @@ public class AddMultipleRangesWindowViewModel : ValidatableViewModelBase
         return new ValidationState(true, "Valid Number");
     }
 
-    private IValidationState IsValidNumberOfRanges(string? input, string? dmxOffsetInput)
+    private IValidationState IsValidNumberOfRanges(string? input, string? dmxOffsetInput, string? dmxStartInput)
     {
         if (!int.TryParse(dmxOffsetInput, out var dmxOffset))
             return new ValidationState(false, "Enter DMX Offset first");
+        if (!int.TryParse(dmxStartInput, out var dmxStart))
+            return new ValidationState(false, "Enter DMX Start first");
 
         var validNumberOfRanges = 0;
 
         if (_is16Bit)
             validNumberOfRanges = _16BitOffset / ((dmxOffset + 1) * _8BitOffset) + 1; // say what?
         else
-            validNumberOfRanges = _8BitOffset / (dmxOffset + 1) + 1;
+            validNumberOfRanges = (_8BitOffset - dmxStart) / (dmxOffset + 1) + 1;
+            
 
         if (!int.TryParse(input, out var number))
             return new ValidationState(false, $"Must enter a number between 0 and {validNumberOfRanges + 1}");
@@ -326,7 +329,7 @@ public class AddMultipleRangesWindowViewModel : ValidatableViewModelBase
             thisViewModel => thisViewModel.SelectedFeature,
             (numberOfRanges, dmxStartValue,
                     dmxOffset, selectedFunction, selectedFeature) =>
-                IsValidNumberOfRanges(numberOfRanges, dmxOffset).IsValid
+                IsValidNumberOfRanges(numberOfRanges, dmxOffset, dmxStartValue).IsValid
                 && IsValidDmxStartValue(dmxStartValue, numberOfRanges, dmxOffset).IsValid
                 && IsValidNumber(dmxOffset).IsValid
                 && _dmxValidator.IsValidFunction(selectedFunction).Result.IsValid
