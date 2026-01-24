@@ -1,6 +1,4 @@
-﻿using Avalonia.Platform;
-
-namespace HogFixtureLibrarianTool.ViewModels;
+﻿namespace HogFixtureLibrarianTool.ViewModels;
 
 public class AboutWindowViewModel : ValidatableViewModelBase
 {
@@ -11,13 +9,9 @@ public class AboutWindowViewModel : ValidatableViewModelBase
         Authors = reader.ReadToEnd();
     }
 
-    public string SoftwareName { get; } = Application.Current is null || Application.Current.Name is null
-        ? "Unknown Application"
-        : Application.Current.Name;
+    public string SoftwareName { get; } = GlobalValues.Name;
 
-    public string SoftwareVersion { get; } = Assembly.GetExecutingAssembly().GetName().Version is null
-        ? "Unknown Version"
-        : Assembly.GetExecutingAssembly().GetName().Version!.ToString();
+    public string SoftwareVersion { get; } = GlobalValues.Version;
 
     public string Authors { get; }
 }

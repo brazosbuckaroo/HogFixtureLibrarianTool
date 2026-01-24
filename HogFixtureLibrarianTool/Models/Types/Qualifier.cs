@@ -10,9 +10,8 @@ public record Qualifier(
 {
     public Qualifier() : this(string.Empty, string.Empty, string.Empty)
     {
-        
     }
-    
+
     [XmlIgnore]
     public Function? Function
     {
@@ -48,7 +47,7 @@ public record Qualifier(
     {
         return Function is not null;
     }
-    
+
     public bool ShouldSerializeFeature()
     {
         return Feature is not null;

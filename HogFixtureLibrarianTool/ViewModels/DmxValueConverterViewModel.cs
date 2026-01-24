@@ -474,8 +474,8 @@ public class DmxValueConverterViewModel : RoutableViewModelBase
 
     private void Create16BitDmxRangeCommand()
     {
-        var newValue = Convert8BitValueTo16BitValue(new HogRange( 
-            DmxStart: Range8BitDmxStartInput,
+        var newValue = Convert8BitValueTo16BitValue(new HogRange(
+            Range8BitDmxStartInput,
             DmxEnd: Range8BitDmxEndInput,
             FunctionName: Range8BitFunctionInput,
             FeatureName: Range8BitFeatureInput,
@@ -549,7 +549,7 @@ public class DmxValueConverterViewModel : RoutableViewModelBase
         }
 
         var range = new HogRange(
-            dmxStart: sixteenBitStartingValue,
+            sixteenBitStartingValue,
             dmxMidOne: (int)midOne,
             dmxMidTwo: (int)midTwo,
             dmxEnd: string.IsNullOrEmpty(eightBitRange.DmxEnd) ? null : sixteenBitEndingValue,
@@ -564,8 +564,8 @@ public class DmxValueConverterViewModel : RoutableViewModelBase
     private HogRange Convert16BitValueTo8BitValue(HogRange sixteenBitRange)
     {
         if (!_dmxValidator.TryConvertDmxStringToIntegers(sixteenBitRange,
-                out var _,
-                out var _,
+                out _,
+                out _,
                 true))
             throw new ArgumentException("Invalid 16-Bit DMX Value.");
 
@@ -590,7 +590,7 @@ public class DmxValueConverterViewModel : RoutableViewModelBase
         }
 
         var range = new HogRange(
-            dmxStart: sixteenBitStartingValue,
+            sixteenBitStartingValue,
             dmxEnd: string.IsNullOrEmpty(sixteenBitRange.DmxEnd) ? null : sixteenBitEndingValue,
             functionName: sixteenBitRange.FunctionName,
             featureName: sixteenBitRange.FeatureName,

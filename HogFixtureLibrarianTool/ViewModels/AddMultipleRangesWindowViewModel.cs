@@ -210,7 +210,7 @@ public class AddMultipleRangesWindowViewModel : ValidatableViewModelBase
         if (_is16Bit)
             validNumberOfRanges = _16BitOffset / ((dmxOffset + 1) * _8BitOffset) + 1; // say what?
         else
-            validNumberOfRanges = (_8BitOffset / (dmxOffset + 1)) + 1;
+            validNumberOfRanges = _8BitOffset / (dmxOffset + 1) + 1;
 
         if (!int.TryParse(input, out var number))
             return new ValidationState(false, $"Must enter a number between 0 and {validNumberOfRanges + 1}");
@@ -257,7 +257,7 @@ public class AddMultipleRangesWindowViewModel : ValidatableViewModelBase
 
                     if (IncludeEndValue)
                         range = new HogRange(
-                            dmxStart: dmxStart,
+                            dmxStart,
                             dmxEnd: endingDmxValue,
                             functionName: SelectedFunction,
                             featureName: SelectedFeature,
@@ -265,7 +265,7 @@ public class AddMultipleRangesWindowViewModel : ValidatableViewModelBase
                             end: endingDmxValue);
                     else
                         range = new HogRange(
-                            dmxStart: dmxStart,
+                            dmxStart,
                             dmxEnd: null,
                             functionName: SelectedFunction,
                             featureName: SelectedFeature,
@@ -273,8 +273,8 @@ public class AddMultipleRangesWindowViewModel : ValidatableViewModelBase
                             end: null);
 
                     ranges[rangeNumber] = range;
-                    dmxStart = endingDmxValue + 1 > HogDmxValidator.Max16BitValue 
-                        ? HogDmxValidator.Max16BitValue 
+                    dmxStart = endingDmxValue + 1 > HogDmxValidator.Max16BitValue
+                        ? HogDmxValidator.Max16BitValue
                         : endingDmxValue + 1;
                 }
             else
@@ -292,15 +292,15 @@ public class AddMultipleRangesWindowViewModel : ValidatableViewModelBase
 
                     if (IncludeEndValue)
                         range = new HogRange(
-                            dmxStart: dmxStart,
+                            dmxStart,
                             dmxEnd: endingDmxValue,
                             functionName: SelectedFunction,
                             featureName: SelectedFeature,
                             start: dmxStart,
                             end: endingDmxValue);
                     else
-                        range = new HogRange( 
-                            dmxStart: dmxStart,
+                        range = new HogRange(
+                            dmxStart,
                             dmxEnd: null,
                             functionName: SelectedFunction,
                             featureName: SelectedFeature,
@@ -308,8 +308,8 @@ public class AddMultipleRangesWindowViewModel : ValidatableViewModelBase
                             end: null);
 
                     ranges[rangeNumber] = range;
-                    dmxStart = endingDmxValue + 1 > HogDmxValidator.Max8BitValue 
-                        ? HogDmxValidator.Max8BitValue 
+                    dmxStart = endingDmxValue + 1 > HogDmxValidator.Max8BitValue
+                        ? HogDmxValidator.Max8BitValue
                         : endingDmxValue + 1;
                 }
         }, cancellation);
@@ -365,7 +365,7 @@ public class AddMultipleRangesWindowViewModel : ValidatableViewModelBase
             validDmxStart = _16BitOffset - numberOfRanges * dmxOffset + 2;
         else
             validDmxStart = _8BitOffset - numberOfRanges * dmxOffset + 2;
-        
+
         switch (validDmxStart)
         {
             case < 0:

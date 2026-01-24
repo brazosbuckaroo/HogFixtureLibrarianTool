@@ -21,6 +21,7 @@ global using Avalonia.Controls.ApplicationLifetimes;
 global using Avalonia.Input.Platform;
 global using Avalonia.Markup.Xaml;
 global using Avalonia.Threading;
+global using Avalonia.Platform;
 global using DynamicData;
 global using DynamicData.Binding;
 global using HogFixtureLibrarianTool.Models.Interfaces;

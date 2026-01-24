@@ -8,7 +8,7 @@ public record Channel(
     bool Unused = false)
     : IHogData, INoNamespaceData
 {
-    public Channel() : this(default, new List<HogRange>())
+    public Channel() : this(default, [])
     {
     }
 
