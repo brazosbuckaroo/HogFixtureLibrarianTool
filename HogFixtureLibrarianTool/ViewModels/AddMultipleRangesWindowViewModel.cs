@@ -360,7 +360,7 @@ public class AddMultipleRangesWindowViewModel : ValidatableViewModelBase
         }
 
         if (!int.TryParse(numberOfRangesInput, out var numberOfRanges) || numberOfRanges <= 0)
-            return new ValidationState(false, "Enter a valid number of ranges first");
+            return new ValidationState(false, "Enter a valid number of ranges");
 
         var validDmxStart = 0;
 
@@ -368,16 +368,10 @@ public class AddMultipleRangesWindowViewModel : ValidatableViewModelBase
             validDmxStart = _16BitOffset - numberOfRanges * dmxOffset + 2;
         else
             validDmxStart = _8BitOffset - numberOfRanges * dmxOffset + 2;
-
-        switch (validDmxStart)
-        {
-            case < 0:
-                return new ValidationState(false, $"Enter a DMX Start greater than or equal to {validDmxStart}");
-            case 0 when dmxStart == validDmxStart:
-                return new ValidationState(true, $"Valid");
-        }
-
-        if (dmxStart < 0 || dmxStart >= validDmxStart)
+        
+        if (validDmxStart == 0 && dmxStart == 0)
+            return new ValidationState(true, "Valid");
+        if (dmxStart < 0 && dmxStart >= validDmxStart)
             return new ValidationState(false, $"Must enter a number between 0 and {validDmxStart}");
 
         return new ValidationState(true, "Valid");

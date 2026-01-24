@@ -42,29 +42,29 @@
                         <Label Classes="Default"
                                Grid.Row="1"
                                Grid.Column="0"
-                               Content="Number of Ranges:" />
-                        <TextBox Classes="Default"
-                                 x:Name="NumberOfRangesInput"
-                                 Grid.Row="1"
-                                 Grid.Column="1"
-                                 Text="{Binding NumberOfRanges}">
-                            <ToolTip.Tip>
-                                <TextBlock Classes="Default"
-                                           x:Name="NumberOfRangesToolTip" />
-                            </ToolTip.Tip>
-                        </TextBox>
-                        <Label Classes="Default"
-                               Grid.Row="2"
-                               Grid.Column="0"
                                Content="DMX Start:" />
                         <TextBox Classes="Default"
                                  x:Name="EightBitDmxValueInput"
-                                 Grid.Row="2"
+                                 Grid.Row="1"
                                  Grid.Column="1"
                                  Text="{Binding DmxStartValue}">
                             <ToolTip.Tip>
                                 <TextBlock Classes="Default"
                                            x:Name="EightBitDmxValueToolTip" />
+                            </ToolTip.Tip>
+                        </TextBox>
+                        <Label Classes="Default"
+                               Grid.Row="2"
+                               Grid.Column="0"
+                               Content="Number of Ranges:" />
+                        <TextBox Classes="Default"
+                                 x:Name="NumberOfRangesInput"
+                                 Grid.Row="2"
+                                 Grid.Column="1"
+                                 Text="{Binding NumberOfRanges}">
+                            <ToolTip.Tip>
+                                <TextBlock Classes="Default"
+                                           x:Name="NumberOfRangesToolTip" />
                             </ToolTip.Tip>
                         </TextBox>
                         <Label Classes="Default"
