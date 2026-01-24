@@ -8,8 +8,8 @@
         <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
         <ApplicationManifest>app.manifest</ApplicationManifest>
         <LangVersion>default</LangVersion>
-        <AssemblyVersion>1.1.2.0</AssemblyVersion>
-        <FileVersion>1.1.2.0</FileVersion>
+        <AssemblyVersion>1.1.3.0</AssemblyVersion>
+        <FileVersion>1.1.3.0</FileVersion>
         <IsPackable>false</IsPackable>
         <Company>dtlighting</Company>
         <Product>Hog Fixture Librarian Tool</Product>
