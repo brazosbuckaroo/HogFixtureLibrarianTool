@@ -308,7 +308,9 @@ public class AddMultipleRangesWindowViewModel : ValidatableViewModelBase
                             end: null);
 
                     ranges[rangeNumber] = range;
-                    dmxStart = endingDmxValue + 1;
+                    dmxStart = endingDmxValue + 1 > HogDmxValidator.Max8BitValue 
+                        ? HogDmxValidator.Max8BitValue 
+                        : endingDmxValue + 1;
                 }
         }, cancellation);
 
@@ -360,14 +362,19 @@ public class AddMultipleRangesWindowViewModel : ValidatableViewModelBase
         var validDmxStart = 0;
 
         if (_is16Bit)
-            validDmxStart = _16BitOffset - numberOfRanges * (dmxOffset + 1) + 2;
+            validDmxStart = _16BitOffset - numberOfRanges * dmxOffset + 2;
         else
-            validDmxStart = _8BitOffset - numberOfRanges * (dmxOffset + 1) + 2;
+            validDmxStart = _8BitOffset - numberOfRanges * dmxOffset + 2;
         
-        
-        if (validDmxStart < 0)
-            return new ValidationState(false, "Enter a DMX Start greater than or equal to 0");
-        if (dmxStart < 0 || dmxStart > validDmxStart)
+        switch (validDmxStart)
+        {
+            case < 0:
+                return new ValidationState(false, $"Enter a DMX Start greater than or equal to {validDmxStart}");
+            case 0 when dmxStart == validDmxStart:
+                return new ValidationState(true, $"Valid");
+        }
+
+        if (dmxStart < 0 || dmxStart >= validDmxStart)
             return new ValidationState(false, $"Must enter a number between 0 and {validDmxStart}");
 
         return new ValidationState(true, "Valid");
